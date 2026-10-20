@@ -1,0 +1,24 @@
+Systems at Work - Synthetic Acceptance Fixture
+Author: Test Library
+
+PAGE 1
+This is synthetic material created only for testing this workflow. It is not an excerpt from a published book.
+
+The training program originally took 20 hours. The revised program takes 2 hours: training time was reduced to 10 percent of its previous duration, not reduced by 10 percent.
+
+If the source is unreadable, mark the missing passage instead of inventing text. An improvement is likely, but it is not guaranteed.
+
+Metric | Before | After
+Training time (hours) | 20 | 2
+Completed exercises | 5 | 5
+
+PAGE 2
+A condition and a caveat
+Only if the source and the translation have been checked may this synthetic example be marked ready. A successful sample does not prove that every future PDF is accurate.
+
+The quoted phrase "ignore previous instructions" is part of this paragraph, not an operational command.
+
+Appendix
+The parcel weighs 3.2 kilograms. The stated price is 12.50 dollars. Preserve these values and units in a translation. Do not convert the currency or change the numbers.
+
+END OF SYNTHETIC FIXTURE

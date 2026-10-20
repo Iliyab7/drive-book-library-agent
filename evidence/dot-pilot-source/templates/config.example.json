@@ -1,0 +1,71 @@
+{
+  "schema_version": "1.0",
+  "configuration_status": "template_not_deployed",
+  "owner_account_display_name": "<YOUR_ACCOUNT_DISPLAY_NAME>",
+  "connection_selection": "<SELECT_AND_VERIFY_YOUR_OWN_DRIVE_CONNECTION>",
+  "destinations": {
+    "mother_folder_id": "<YOUR_MOTHER_FOLDER_ID>",
+    "inbox_folder_id": "<YOUR_INBOX_FOLDER_ID>",
+    "output_folder_id": "<YOUR_OUTPUT_FOLDER_ID>",
+    "checkpoints_folder_id": "<YOUR_CHECKPOINTS_FOLDER_ID>",
+    "master_spreadsheet_id": "<YOUR_MASTER_SPREADSHEET_ID>",
+    "current_skill_file_id": "<YOUR_CURRENT_SKILL_FILE_ID>",
+    "operations_guide_file_id": "<YOUR_OPERATIONS_GUIDE_FILE_ID>"
+  },
+  "workflow": {
+    "shared_state": "Google Sheets",
+    "file_store": "Google Drive",
+    "notion_used": false,
+    "single_sheet_writer": true,
+    "max_active_books": 1,
+    "source_dedupe_fields": [
+      "source_file_id",
+      "source_sha256"
+    ],
+    "independent_roles": [
+      "Review",
+      "QA"
+    ],
+    "quality_gate": "no_ready_with_material_unresolved_gaps"
+  },
+  "schedule": {
+    "requested_local_schedule": "start of every hour",
+    "timezone": "Asia/Tehran",
+    "status": "unverified_for_this_account",
+    "saved_schedule_text": null,
+    "last_verified_run_utc": null,
+    "new_file_without_message_test": "[PILOT_ACCOUNT_REDACTED]"
+  },
+  "recovery": {
+    "checkpoint_verified_before_resume": true,
+    "retry_limit_proposed": 2,
+    "retry_limit_status": "proposal_verify_before_deployment",
+    "lease_duration_seconds": null,
+    "lease_duration_note": "Select based on observed task duration; verify previous execution before reclaiming."
+  },
+  "cost_policy": {
+    "new_paid_services_authorized": false,
+    "unknown_usage_value": null,
+    "cost_estimation_from_text_size": "not_accepted"
+  },
+  "no_secrets_notice": "Do not place passwords, API keys, tokens or cookies in this file.",
+  "token_usage": {
+    "protocol": "TOKEN_USAGE.v1.0.md",
+    "include_stages": [
+      "model_based_extraction",
+      "translation",
+      "Review",
+      "QA",
+      "fixes",
+      "rechecks",
+      "retries"
+    ],
+    "require_actual_reported_usage": true,
+    "dedupe_by_provider_request_or_report_scope": true,
+    "unknown_value": null,
+    "allow_word_derived_estimate_as_actual": false,
+    "separate_partial_observed_sum_from_complete_total": true,
+    "avoid_double_counting_cached_reasoning_subsets": true,
+    "shared_orchestration": "unallocated_without_exact_attribution"
+  }
+}

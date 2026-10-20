@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "id": "20261020T120603Z-portable-library-kit",
+  "repository": "Iliyab7/drive-book-library-agent",
+  "occurred_at": "2026-10-20T12:06:03Z",
+  "title": "Prepare the portable agent library setup kit",
+  "summary": "Created a self-contained receiving-agent entry point, short skill, workflow and role prompts, private-account configuration/Sheets templates, acceptance matrix, synthetic PDF fixture and scoped pilot history.",
+  "outcome": "Offline package validation and 13 unit/fixture checks pass. An independent receiving-agent review found and then confirmed fixes for skill-reference portability, worker ownership/recovery and local test prerequisites. No recipient-account deployment or live translation benchmark is certified by these checks. Private project-memory import is not verified by publishing this record.",
+  "status": "local-tested",
+  "decisions": [
+    "Use Google Drive for files and Google Sheets for catalog plus shared operational memory.",
+    "A coordinator/executor uses distinct Review and QA contexts with source-grounded version-specific evidence.",
+    "Separate setup readiness, observed automation and long-term operational acceptance.",
+    "Keep credentials, books and real account-specific destinations outside Git."
+  ],
+  "blockers": [],
+  "next_actions": [
+    "Run the documented fresh-account bootstrap with authorized connections and record the operational acceptance results.",
+    "Keep recipient library data private; distribute only the sanitized public setup kit.",
+    "Reconcile final pilot reports and any future benchmark with their actual evidence, without changing historical initial-artifact review claims."
+  ],
+  "evidence": [
+    "START-HERE.md",
+    "docs/HISTORY-AND-DECISIONS-FA.md",
+    "acceptance/ACCEPTANCE-FA.csv",
+    "evidence/bundle-validation.json"
+  ]
+}

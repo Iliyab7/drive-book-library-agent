@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "package_version": "1.0.0",
+  "checked_on": "2026-10-20",
+  "scope": "Offline kit and synthetic fixture validation, plus independent instruction-level review. No fresh-account deployment was executed by the package author.",
+  "checks": {
+    "bundle_references_and_privacy_scan": "pass",
+    "template_and_acceptance_integrity": "pass",
+    "unit_and_fixture_tests": {"passed": 13, "failed": 0},
+    "validator_branch_aware_coverage_percent": 87,
+    "skill_frontmatter_validation": "pass",
+    "standalone_skill_reference_test": "pass",
+    "synthetic_pdf_pages": 2,
+    "synthetic_pdf_text_readback": "pass",
+    "synthetic_pdf_visual_review_all_pages": "pass",
+    "independent_handoff_review": "pass_after_fixes"
+  },
+  "independent_review_fixes": [
+    "Runtime references now travel inside the skill package; Drive deployments must rebind relative links to verified installed file links.",
+    "Recovery and overlap require verified serialization, recoverable worker/session handles, status checks and safe handling of unknown workers.",
+    "Local validation prerequisites and dependency installation are documented."
+  ],
+  "not_run": ["Recipient-account Google setup", "Recipient scheduled cycle", "Recipient OCR/translation quality", "Unattended long-term continuity", "Controlled cross-harness benchmark"],
+  "commands": ["python -B tools/validate_kit.py", "python -B -m unittest discover -s tests -v"],
+  "note": "Checks validate the kit files and the published synthetic fixture; they do not measure the translation quality of a new book."
+}

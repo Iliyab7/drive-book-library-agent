@@ -1,0 +1,284 @@
+{
+  "schema_version": "1.0",
+  "package_version": "1.0",
+  "snapshot_utc": "2026-10-20T12:01:00Z",
+  "release_status": "ready_for_packaging",
+  "authority_notice": "Drive files and Google Sheets state are authoritative. This is a dated deployment snapshot, not a daemon or live status service.",
+  "link_access_notice": "Verified owner-account destinations supplied by the executor. No public sharing or access by another account is asserted.",
+  "owner_account_display_name": "[PILOT_ACCOUNT_REDACTED]",
+  "destinations": {
+    "mother": "http[PILOT_WORKSPACE_REDACTED]",
+    "inbox": "http[PILOT_WORKSPACE_REDACTED]",
+    "output": "http[PILOT_WORKSPACE_REDACTED]",
+    "checkpoints": "http[PILOT_WORKSPACE_REDACTED]",
+    "skill": "http[PILOT_WORKSPACE_REDACTED]",
+    "master_sheet": "http[PILOT_WORKSPACE_REDACTED]",
+    "versioned_guide": "http[PILOT_WORKSPACE_REDACTED]",
+    "download_package": null,
+    "review_report": "http[PILOT_WORKSPACE_REDACTED]",
+    "qa_report": "http[PILOT_WORKSPACE_REDACTED]",
+    "checkpoint_restore_report": "http[PILOT_WORKSPACE_REDACTED]",
+    "runtime_comparison_report": "http[PILOT_WORKSPACE_REDACTED]",
+    "documentation_folder": "http[PILOT_WORKSPACE_REDACTED]",
+    "reports_folder": "http[PILOT_WORKSPACE_REDACTED]",
+    "user_workflow_directive": "http[PILOT_WORKSPACE_REDACTED]",
+    "qa_addendum": "http[PILOT_WORKSPACE_REDACTED]",
+    "fixture_review_report": "http[PILOT_WORKSPACE_REDACTED]",
+    "fixture_qa_report": "http[PILOT_WORKSPACE_REDACTED]",
+    "current_skill_previous_version_archive": "http[PILOT_WORKSPACE_REDACTED]",
+    "algorithm_delta_review_report": "http[PILOT_WORKSPACE_REDACTED]",
+    "algorithm_delta_qa_report": "http[PILOT_WORKSPACE_REDACTED]"
+  },
+  "pending_link_notice": "Null means pending verified upload/link, not a broken or guessed URL.",
+  "schedule": {
+    "requested": "start of every hour",
+    "timezone": "Asia/Tehran",
+    "current_requested_alignment_status": "saved_configuration_verified_one_real_aligned_run_observed",
+    "saved_schedule": "DTSTART;TZID=Asia/Tehran:20261020T150000\nRRULE:FREQ=HOURLY;BYMINUTE=0;BYSECOND=0",
+    "first_prior_trigger_utc": "2026-10-20T10:46:38Z",
+    "first_prior_readonly_intake_check_utc": "2026-10-20T10:47:00Z",
+    "first_prior_run_scope": "Read current skill, sheet and two known PDFs; avoided restarting known completed/active inputs. Approximate check time.",
+    "new_pdf_end_to_end_scheduled_test": "accepted_limited_scope_one_page_synthetic_fixture",
+    "without_laptop_end_to_end_test": "cloud_workflow_used_no_user_desktop_but_actual_power_off_not_observed",
+    "is_enabled": true,
+    "default_timezone": "Asia/Tehran",
+    "saved_config_verified_utc": "2026-10-20T11:16:00Z",
+    "timing_mode": "condition_watch",
+    "timing_mode_note": "The update tool did not expose a timing-mode change. Accepted configuration is not proof of exact-second execution.",
+    "next_run_time": null,
+    "first_aligned_trigger_due_local": "2026-10-20T15:00:00+03:30",
+    "first_aligned_trigger_due_utc": "2026-10-20T11:30:00Z",
+    "first_aligned_execution_observed": true,
+    "synthetic_test_pdf_uploaded_utc": "2026-10-20T11:19:53Z",
+    "synthetic_test_note": "One-page original synthetic PDF uploaded; intentionally not pre-registered or processed before the real trigger.",
+    "early_callback": "Received around 11:22 UTC and held until the scheduled clock time; not processed early.",
+    "actual_discovery_utc": "2026-10-20T11:30:47Z",
+    "fixture_processing_started_utc": "2026-10-20T11:31:21Z",
+    "fixture_qa_and_drive_hash_checks_finished_utc": "2026-10-20T11:35:38Z",
+    "fixture_wall_elapsed_seconds": 257,
+    "wall_elapsed_scope": "Processing start through independent QA raw-Drive verification; not CPU time.",
+    "new_human_prompt_after_fixture_upload": false,
+    "reliability_limits": [
+      "No exact-second punctuality guarantee.",
+      "One small born-digital synthetic PDF; not evidence of future long/scanned-book reliability."
+    ],
+    "per_book_token_protocol_update_utc": "2026-10-20T11:52:31Z",
+    "enabled_and_hourly_schedule_unchanged_after_token_update": true
+  },
+  "books": [
+    {
+      "title": "The Algorithm",
+      "role": "preserved_existing_baseline",
+      "output_folder": "http[PILOT_WORKSPACE_REDACTED]",
+      "caveats": [
+        "Later translation reserialization and preserved prior files retained in history.",
+        "Three legacy wrapped cross-reference fragments remain separate nonblocking list blocks.",
+        "No new whole-book semantic audit claimed."
+      ],
+      "overwritten_by_documentation_task": false,
+      "prior_version_backup_url": "http[PILOT_WORKSPACE_REDACTED]",
+      "candidate_indent_correction": {
+        "superseded_candidate_status": "not_published",
+        "superseded_target_lines": 229,
+        "superseded_inserted_spaces": 458
+      },
+      "published_format_repair": {
+        "version": "v3",
+        "status": "published_and_independently_QA_raw_Drive_verified",
+        "verified_utc": "2026-10-20T11:48:02Z",
+        "target_indented_lines": 227,
+        "actual_index_subentries": 224,
+        "wrapped_cross_reference_continuations": 3,
+        "target_inserted_ascii_spaces": 454,
+        "source_flattened_alphabet_navigation_lines": 2,
+        "source_removed_ascii_spaces": 4,
+        "nonwhitespace_content_and_link_targets_unchanged": true,
+        "blocks_and_order_unchanged": 1425,
+        "full_new_semantic_audit": false
+      },
+      "files": {
+        "original.md": {
+          "url": "http[PILOT_WORKSPACE_REDACTED]",
+          "sha256": "273be7d9af1d0070e900b9ef143c4a79b1d45ab47db2a3c9daad23c16836baa7",
+          "bytes": 385554
+        },
+        "translation.fa.md": {
+          "url": "http[PILOT_WORKSPACE_REDACTED]",
+          "sha256": "4056725261287169b457de37e038fd608d53f9a4544969e6565adeff8dbbd003",
+          "bytes": 593173
+        }
+      },
+      "prior_source_backup_url": "http[PILOT_WORKSPACE_REDACTED]"
+    },
+    {
+      "title": "System Thinker (OCR)",
+      "identity_note": "31-page mixed-language leadership training compilation; filename is not an established formal title for the whole packet.",
+      "status": "needs_review",
+      "pdf_pages": 31,
+      "readable_text_status": "extracted_and_translated",
+      "unreadable_spans": {
+        "count": 4,
+        "pdf_pages": [
+          16,
+          30,
+          31
+        ]
+      },
+      "formal_review": "completed_v1.1_no_new_major_text_defect_source_gaps_remain",
+      "formal_qa": "completed_v1_no_new_major_error_in_independent_sample_source_gaps_remain",
+      "output_folder": "http[PILOT_WORKSPACE_REDACTED]",
+      "files": {
+        "original.pdf": {
+          "url": "http[PILOT_WORKSPACE_REDACTED]",
+          "sha256": "c3b040207674d1e6e30181c6c8689d07c100f366fdeb8de67199ceba5df68878"
+        },
+        "original.md": {
+          "url": "http[PILOT_WORKSPACE_REDACTED]",
+          "sha256": "1e71632656f960866ece00f2db3ed6b2515aefbd4fb8244134fa7925831093da"
+        },
+        "translation.fa.md": {
+          "url": "http[PILOT_WORKSPACE_REDACTED]",
+          "sha256": "20487ee141c7cab3cb70f736047e57952f0e55512bb753b36f41b9466a1294b6"
+        }
+      },
+      "drive_roundtrip_verification": {
+        "status": "exact_bytes_and_sha256_match",
+        "verified_utc": "2026-10-20T11:09:15Z",
+        "scope": "Three delivered files; not a semantic acceptance decision."
+      },
+      "formal_review_scope": {
+        "aligned_positions": 589,
+        "semantic_pair_read_positions": 565,
+        "unique_content_blocks_read": 534,
+        "navigation_blocks_read": 31,
+        "duplicate_content_positions_checked_by_exact_equality": 24,
+        "all_pages_visual_structural_inspection": 31,
+        "complete_glyph_by_glyph_retranscription": false
+      },
+      "formal_qa_scope": {
+        "computational_block_checks": 589,
+        "headings": 94,
+        "tables": 14,
+        "numeric_blocks": 174,
+        "semantic_sample_blocks": 39,
+        "semantic_sample_pages": 13,
+        "visual_pages": [
+          1,
+          7,
+          8,
+          11,
+          16,
+          23,
+          24,
+          25,
+          30,
+          31
+        ],
+        "whole_book_line_by_line_semantic_audit": false
+      }
+    },
+    {
+      "title": "TEST_Library_Automation_20261020",
+      "record_type": "synthetic_test_fixture",
+      "status": "ready_for_this_exact_test_version",
+      "pdf_pages": 1,
+      "content_blocks": 7,
+      "scope": "Born-digital English synthetic sample, simple table; not a full book or scan.",
+      "catalog_test_tag_retained": true,
+      "deleted": false,
+      "output_folder": "http[PILOT_WORKSPACE_REDACTED]",
+      "files": {
+        "original.pdf": {
+          "url": "http[PILOT_WORKSPACE_REDACTED]",
+          "sha256": "abd2f492c8a2ba6d85e2eee7213b5537b634c7f74a6fe2c87fa1829a9254b0b2"
+        },
+        "original.md": {
+          "url": "http[PILOT_WORKSPACE_REDACTED]",
+          "sha256": "b50345faad23b437c2f029f982823ef582ba652c96a40a5aa1c27005a3dab455"
+        },
+        "translation.fa.md": {
+          "url": "http[PILOT_WORKSPACE_REDACTED]",
+          "sha256": "bfa97da334e3efa7628f62e62fee2965ba0c9d05063616917b5fcd698864dd6e"
+        }
+      },
+      "review_scope": "Separate Review, all 7 blocks and full 1-page PDF; passed.",
+      "qa_scope": "Separate QA, all 7 blocks and full 1-page PDF plus raw Drive hash equality; passed.",
+      "drive_roundtrip_verification_utc": "2026-10-20T11:35:38Z"
+    }
+  ],
+  "tests": {
+    "controlled_local_checkpoint_restore": "accepted_limited_scope_independently_repeated_by_QA",
+    "actual_interrupted_run_resume": "[PILOT_ACCOUNT_REDACTED]",
+    "new_pdf_autonomous_processing": "accepted_limited_scope_one_page_synthetic_fixture",
+    "quota_exhaustion": "[PILOT_ACCOUNT_REDACTED]_and_not_intentionally_requested",
+    "cross_account_deployment": "[PILOT_ACCOUNT_REDACTED]",
+    "actual_laptop_power_off": "[PILOT_ACCOUNT_REDACTED]",
+    "concurrent_multi_job_queue_and_leases": "[PILOT_ACCOUNT_REDACTED]"
+  },
+  "usage": {
+    "tokens": null,
+    "cost": null,
+    "currency": null,
+    "model_per_stage": "unknown_unless_separately_verified",
+    "per_book_protocol": "TOKEN_USAGE.v1.0.md",
+    "per_book_actual_complete_totals": "unknown",
+    "per_book_summary_columns": "AP:AU",
+    "column_write_readback_status": "AP:AU_present_and_current_three_rows_verified_unknown",
+    "token_estimation_from_words_used": false,
+    "shared_orchestration_arbitrarily_allocated": false,
+    "subtotal_vs_complete_total_distinguished": true,
+    "schedule_token_protocol_updated_utc": "2026-10-20T11:52:31Z",
+    "scheduled_responsibility_includes_per_book_tokens": true,
+    "columns_readback_verified_utc": "2026-10-20T11:51:52Z",
+    "shared_method_record": "D11"
+  },
+  "runtime_comparison": {
+    "status": "access_and_documentation_review_complete_model_execution_comparison_[PILOT_ACCOUNT_REDACTED]",
+    "fabricated_ranking": false,
+    "codex": "Installed and existing ChatGPT login observed, but startup failed before model execution on a protected read-only CLI home. No blind retry or credential copying.",
+    "claude_code": "Not present in checked locations; execution untested.",
+    "google_antigravity": "Not present in checked locations; execution untested.",
+    "scope_note": "Presence checks are scoped to inspected locations, not a claim of universal unavailability.",
+    "report_url": "http[PILOT_WORKSPACE_REDACTED]",
+    "codex_cli_version": "0.163.0",
+    "codex_failed_startup_wall_seconds": 5.587664,
+    "no_candidate_model_response": true,
+    "no_runtime_winner_or_migration_recommendation": true
+  },
+  "package_contents_notice": "Documentation, workflow prompts, configuration templates and synthetic fixture only. No full books, credentials or private conversation history.",
+  "skill_version_distinction": {
+    "package_skill": "Portable template only; not automatically the deployed current skill.",
+    "deployed_skill": "Current Drive skill minimally updated with responsibility, shared Sheets state, separate roles and guide links; original archived.",
+    "deployed_skill_update_status": "deployed_and_hash_verified",
+    "deployed_skill_sha256": "c397e5ecb2bc832c81672f444a387f29356326a1f79c51b1c1889ce075c50fa1",
+    "token_usage_protocol_location": "Current skill links shared methods; token protocol is recorded in shared-method row D11 and scheduled responsibility. No separate skill edit is pending."
+  },
+  "checkpoint_restore": {
+    "archive_url": "http[PILOT_WORKSPACE_REDACTED]",
+    "bytes": 587175,
+    "sha256": "f38ea124f9eea5956a5a4c3d7a019bfad440c0cad1986ae6a350fdc0a527eeee",
+    "manifest_files_hash_verified": 52,
+    "crc_ok": true,
+    "safe_paths": true,
+    "aligned_unique_ids": 589,
+    "completed_chunks_reused": 5,
+    "new_translation_model_calls": 0,
+    "fresh_empty_directories": true,
+    "independently_repeated_by_qa": true,
+    "executor_local_seconds": 0.03086,
+    "qa_local_seconds": 0.03076336599951901,
+    "timing_excludes_network": true,
+    "live_crash_resume_tested": false
+  },
+  "embedded_checkpoint_restore_report": "reports/CHECKPOINT_RESTORE.v1.0.md",
+  "publication_notes": {
+    "download_package": "Self-link intentionally null to avoid a circular packaging dependency; verified download link is supplied in final delivery.",
+    "qa_addendum": "QA v1.1 source-package acceptance report published at destinations.qa_addendum; ZIP transport receipt is separate in the master Sheet.",
+    "qa_pending_reports_folder": "http[PILOT_WORKSPACE_REDACTED]",
+    "checkpoint_restore_report": "Embedded frozen report and verified external URL both available; see destinations.checkpoint_restore_report."
+  },
+  "current_assistant_name": "pilot-assistant",
+  "assistant_name_scope": "Current deployment name only; historical role/session identifiers and quoted source text are preserved.",
+  "source_package_qa": "accepted; 34 files; final transport receipt stored separately in master Sheet",
+  "_archive_notice": "Redacted historical pilot snapshot; never use as recipient configuration or schedule instructions."
+}

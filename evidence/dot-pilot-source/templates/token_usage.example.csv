@@ -1,0 +1,2 @@
+usage_record_id,book_version_id,run_id,stage,provider_request_or_report_id,provider,model_if_verified,usage_scope,attribution_scope,reported_input_tokens,reported_output_tokens,reported_total_tokens,cached_input_subset_tokens,reasoning_output_subset_tokens,provider_field_semantics,cumulative_or_per_request,overlap_resolution,coverage_status,reported_at_utc,evidence_url,notes
+,,,translation,,,,per_request,book,,,,,,,,,unknown,,,Template only; no actual usage recorded.

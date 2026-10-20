@@ -1,0 +1,4 @@
+environment,access_verified,model_verified,settings,input_sha256,scope,quality_result,reported_tokens,reported_cost,currency,wall_seconds,active_seconds,wait_seconds,retries,human_intervention,evidence_url,status
+Codex,,,,,,,,,,,,,,,,pending
+Claude Code,,,,,,,,,,,,,,,,pending
+Google Antigravity,,,,,,,,,,,,,,,,pending

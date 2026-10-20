@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "template_only": true,
+  "workflow": "drive-book-library",
+  "package_version": "1.0.0",
+  "account_verified": false,
+  "root_folder_url": null,
+  "inbox_url": null,
+  "output_url": null,
+  "system_folder_url": null,
+  "spreadsheet_url": null,
+  "skill_url": null,
+  "workflow_url": null,
+  "review_prompt_url": null,
+  "qa_prompt_url": null,
+  "config_url": null,
+  "runtime": {"coordinator": null, "execution_environment": null, "requires_local_device_online": null, "review_delegation_verified": false, "qa_delegation_verified": false},
+  "coordination": {"controller_reference": null, "serialization_mechanism": null, "serialization_verified": false, "unknown_worker_policy": "hold_and_notify"},
+  "schedule": {"timezone": "Asia/Tehran", "cadence": "hourly", "id": null, "active_readback_at": null, "next_run_at": null, "observed_run_at": null, "notification_destination": "originating ChatGPT conversation"},
+  "readiness": {"ready_for_pdf": false, "automated_cycle_observed": false, "blockers": []}
+}

@@ -1,0 +1,145 @@
+{
+  "schema_version": 1,
+  "reviewed_at": "2026-10-20T10:29:28Z",
+  "scope": "Read-only independent review of the three exact downloaded artifacts supplied by the user, representing Dot's run before receiving the proposed skill. No correction or retranslation was performed.",
+  "book": "The Algorithm — Jon McNeill, with Stephen Baker",
+  "artifact_sha256": {
+    "original.pdf": "580c0dec27c519b084e7ac53fafdad6cc62fa542b1906f874d923730ed0ea2bd",
+    "original.md": "6692dd80ccb962d9836b078d3fa8d54bd296c3cdc85c6af3c4ff7d5853957183",
+    "translation.fa.md": "3f4b62d96be7ae270f26e5c0837e9692deb6946de7323c5e6a8312b6a623fc1d"
+  },
+  "verdict": {
+    "extraction": "Very good source fidelity on this predominantly text-layer PDF, with minor structural metadata and Markdown-list issues.",
+    "translation": "Good, readable and meaning-faithful in the reviewed sample. No major semantic reversal was observed in the 105 core sampled blocks. This is not a line-by-line certification of the whole translation.",
+    "use": "Suitable as a positive baseline for internal reading and source-based AI use, with small formatting and editorial improvements.",
+    "skill_decision": "No evidence that this book needs wholesale retranslation or a heavier forced workflow. Use the concise skill to stabilize quality criteria, catalog metadata, delivery checks and future runs while preserving agent discretion."
+  },
+  "coverage": {
+    "structural_review_pdf_pages": 162,
+    "source_blocks": 1425,
+    "target_blocks": 1425,
+    "identical_ids_order_page_and_kind_metadata": true,
+    "missing_or_duplicate_target_ids": 0,
+    "empty_translatable_blocks": 0,
+    "pdf_text_layer_words": 43957,
+    "aligned_pdf_words": 43895,
+    "token_alignment_percent": 99.859,
+    "alignment_interpretation": "Diagnostic word alignment to the PDF text layer, not OCR accuracy or translation accuracy. Examined differences were line-wrap compounds, separated drop capitals and a decorative-glyph headline; image-only title pages were checked separately.",
+    "semantic_core_blocks_reviewed": 105,
+    "semantic_core_source_words": 5607,
+    "semantic_core_distinct_pdf_pages_touched": 64,
+    "selection": "All 42 guidance blocks, all 40 paragraph blocks selected for percentages or likely/unless/not-necessarily language, and 24 systematically spaced body paragraphs; one overlap gives 105 unique core blocks. Additional title, numerical-flag, end-matter and specific contextual blocks were inspected but are not included in that core count.",
+    "visual_pdf_pages_reviewed": [
+      1,
+      2,
+      4,
+      5,
+      6,
+      8,
+      96,
+      111,
+      129,
+      162
+    ],
+    "all_image_bearing_pdf_pages_reviewed": true,
+    "internal_links_each_markdown": 831,
+    "unresolved_internal_anchor_targets": 0,
+    "numeric_difference_candidates_reviewed": 34,
+    "confirmed_numeric_value_errors_among_candidates": 0,
+    "numeric_note": "Differences reflected valid numeral-to-word, ordinal or magnitude representation, such as 500000 versus 500 thousand. This check does not independently establish correctness of every spelled-out value in the book."
+  },
+  "positive_examples": [
+    {
+      "blocks": [
+        "b00007"
+      ],
+      "pdf_page": 2,
+      "finding": "The image-only collaborator credit With Stephen Baker is present in both Markdown outputs."
+    },
+    {
+      "blocks": [
+        "b00343"
+      ],
+      "pdf_page": 50,
+      "finding": "Cut training down to 10 percent of prior time remains a reduction to 10 percent, rather than a reduction by 10 percent."
+    },
+    {
+      "blocks": [
+        "b00625"
+      ],
+      "pdf_page": 94,
+      "finding": "Very likely remains probabilistic rather than becoming a guarantee."
+    },
+    {
+      "blocks": [
+        "b00812"
+      ],
+      "pdf_page": 124,
+      "finding": "Eating your own dog food is translated contextually as using one's own product, rather than literally."
+    }
+  ],
+  "findings": [
+    {
+      "severity": "minor-structure",
+      "blocks": [
+        "b00096",
+        "b00105",
+        "b00222",
+        "b00273"
+      ],
+      "pdf_pages": [
+        14,
+        15,
+        34,
+        41
+      ],
+      "finding": "Both Markdown files parse as four ordered-list containers holding only the first numbered item of each source list. Anchors and paragraph boundaries interrupt the remaining numbered items. The Persian file additionally escapes 12 number markers. The text and visible numbering remain present, but continuous list semantics are weak.",
+      "evidence": "CommonMark parsing: four ordered-list containers and 550 list-item nodes in each file; 546 are index entries and four are numbered-list first items.",
+      "recommendation": "Preserve stable anchors while emitting each numbered sequence as a continuous semantic Markdown list."
+    },
+    {
+      "severity": "minor-metadata",
+      "blocks": [
+        "b00311",
+        "b00768"
+      ],
+      "pdf_pages": [
+        46,
+        118
+      ],
+      "finding": "Two ordinary chapter-opening paragraphs are labeled kind:list_item in source and target metadata. Their prose is present and readable.",
+      "recommendation": "Use paragraph metadata for these two blocks to improve downstream structural ingestion."
+    },
+    {
+      "severity": "minor-editorial",
+      "blocks": [
+        "b00206",
+        "b00393",
+        "b00762",
+        "b00810"
+      ],
+      "pdf_pages": [
+        31,
+        58,
+        117,
+        124
+      ],
+      "finding": "The repeated source heading GUIDANCE appears as راهنمای عمل, راهنمای عملی and راهنما.",
+      "recommendation": "Choose one rendering for this repeated section heading. This is an editorial consistency issue, not a substantive meaning error."
+    },
+    {
+      "severity": "minor-formatting",
+      "finding": "The Persian Markdown contains 1433 standalone nonbreaking-space entities, adding unnecessary spacing and clutter.",
+      "recommendation": "Clean redundant spacing while preserving the block anchors and text."
+    }
+  ],
+  "limitations": [
+    "The structural comparison covered the complete files, while semantic translation review was sampled, not all 1425 blocks.",
+    "The source is mostly clean selectable text; it is not a demanding scanned-book or complex-table benchmark.",
+    "Existing internal targets were checked, but every navigation link was not individually validated against its original PDF destination.",
+    "The supplied files establish artifact quality; they do not independently prove the exact runtime, Codex delegation, model usage, processing cost, original upload byte identity or unattended scheduling.",
+    "Direct connector and browser access to the private folder were unavailable in the current account context; the review used the exact local files subsequently supplied by the user."
+  ],
+  "next_step": "Retain this unassisted output as the baseline. Trial the concise skill on a representative scanned or complex-layout document and compare the same measurable criteria; no new run is initiated by this review.",
+  "distribution_note": "Sanitized copy of the independent review. Private destination links and source-book files are deliberately absent; artifact hashes identify the reviewed initial revision."
+}

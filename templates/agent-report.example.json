@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "template_only": true,
+  "report_id": null,
+  "run_id": null,
+  "role": null,
+  "session_reference": null,
+  "artifact_hashes": {"original.pdf": null, "original.md": null, "translation.fa.md": null},
+  "coverage": {"kind": "not_run", "pages_or_sections": [], "selection_reason": null, "limitations": []},
+  "checks": [],
+  "findings": [],
+  "verdict": "not_run",
+  "next_action": null
+}

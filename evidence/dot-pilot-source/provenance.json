@@ -1,0 +1,223 @@
+{
+  "schema_version": 1,
+  "source_name": "drive-book-library-v1.0.zip",
+  "source_zip_bytes": 75819,
+  "source_zip_sha256": "9faeaf338cfc9b8529a355c034f0b27318452903752126a02dcb687ea42f8914",
+  "verified_manifest_entries": 34,
+  "source_crc": "pass",
+  "redacted": true,
+  "source_is_historical_not_bootstrap": true,
+  "files": [
+    {
+      "source_file": "CHANGELOG.md",
+      "archived_file": "CHANGELOG.md",
+      "source_sha256": "7b2d2f2ef7409b89e50d4c1ced2ce34033319dd0bf9f9e66843a5e150982ec9c",
+      "redacted_sha256": "2e2cc5917b813be8d02fc8910065e7642d2b84cd6c10955e587d982fe148e019"
+    },
+    {
+      "source_file": "COSTS_COMPARISON.v1.0.md",
+      "archived_file": "COSTS_COMPARISON.v1.0.md",
+      "source_sha256": "121517c67aacb73865a0ff1cd3462a71a79ca14a9e83cd7afb46eda87e3adcee",
+      "redacted_sha256": "9956af353d7bd614f925be8ad8681239323f70e43c0bd171b235e7dd217d56aa"
+    },
+    {
+      "source_file": "DEPLOYMENT.v1.0.json",
+      "archived_file": "DEPLOYMENT.v1.0.json",
+      "source_sha256": "5b3fc7729d4cb03f1909c7cf6db01fd61c69fc5a33e43fa98389f4348da8a30d",
+      "redacted_sha256": "94af11092467d596fefef2e73bfb1e083df3236e74a9005493589eb62799dc05"
+    },
+    {
+      "source_file": "OPERATIONS.v1.0.md",
+      "archived_file": "OPERATIONS.v1.0.md",
+      "source_sha256": "a238aaf5e3821c94bb7c2a417f8cf72d24ec762265ed8a53aba4580b1ea36bee",
+      "redacted_sha256": "a238aaf5e3821c94bb7c2a417f8cf72d24ec762265ed8a53aba4580b1ea36bee"
+    },
+    {
+      "source_file": "package_release.py",
+      "archived_file": "package_release.py.txt",
+      "source_sha256": "d54a2a4cd261897c2ba4e707a5bb2c502b7ac2df0303a38444d6331633725950",
+      "redacted_sha256": "0512db37228f6e0398bd4f5397a21942630c2e92f1cdb4ad7c230957251777b6"
+    },
+    {
+      "source_file": "prompts/EXECUTOR.fa.txt",
+      "archived_file": "prompts/EXECUTOR.fa.txt",
+      "source_sha256": "865df896d7d3ce20da88a4420c7f995a752325cc35e0fc615813b2c6fc3ad6fe",
+      "redacted_sha256": "865df896d7d3ce20da88a4420c7f995a752325cc35e0fc615813b2c6fc3ad6fe"
+    },
+    {
+      "source_file": "prompts/QA.fa.txt",
+      "archived_file": "prompts/QA.fa.txt",
+      "source_sha256": "7e1fbcb710870b0738ec4bcd3f73a698d2f5de79145ed9d8b73c792d7420f1c3",
+      "redacted_sha256": "9265d21efb9aa40274149ad28eb6b6fba6f430badf2e78148b69ecff3f9361f7"
+    },
+    {
+      "source_file": "prompts/REVIEW.fa.txt",
+      "archived_file": "prompts/REVIEW.fa.txt",
+      "source_sha256": "11306c05928980bccbd6dfa4a8c7f92b836684702863a5bc772e62811602ea2c",
+      "redacted_sha256": "11306c05928980bccbd6dfa4a8c7f92b836684702863a5bc772e62811602ea2c"
+    },
+    {
+      "source_file": "prompts/SETUP_NEW_ACCOUNT.fa.txt",
+      "archived_file": "prompts/SETUP_NEW_ACCOUNT.fa.txt",
+      "source_sha256": "90024fbd320131fdf8dce8dee305ce95025aa7bd5abc518100ad80c1f265c7c8",
+      "redacted_sha256": "90024fbd320131fdf8dce8dee305ce95025aa7bd5abc518100ad80c1f265c7c8"
+    },
+    {
+      "source_file": "RECOVERY_QUEUE.v1.0.md",
+      "archived_file": "RECOVERY_QUEUE.v1.0.md",
+      "source_sha256": "cc4d461fe5f2a7a53e9c05edb5fcdf5ecc497ec519c80452ccba26b7160bde00",
+      "redacted_sha256": "cc4d461fe5f2a7a53e9c05edb5fcdf5ecc497ec519c80452ccba26b7160bde00"
+    },
+    {
+      "source_file": "reports/CHECKPOINT_RESTORE.v1.0.md",
+      "archived_file": "reports/CHECKPOINT_RESTORE.v1.0.md",
+      "source_sha256": "17f641cdec3fa5a124ea05afd69a9ca7fa2bac4fac286b92f2a0619428bb2a19",
+      "redacted_sha256": "ebdd6f3ce3ba6617d04e2d4a46fdf31c85c74fa366016cb87cd456e03b661405"
+    },
+    {
+      "source_file": "reports/QA.v1.0.md",
+      "archived_file": "reports/QA.v1.0.md",
+      "source_sha256": "d3af39503c8a0a8ba2e971f6d462be10d12d85f4b282692fa493e04d83ef4351",
+      "redacted_sha256": "ee5d2c95b8ec07dbda83c27302898dde3ca8c0ba82f4792152d75fb7419ac096"
+    },
+    {
+      "source_file": "reports/QA_ALGORITHM_DELTA.v3.md",
+      "archived_file": "reports/QA_ALGORITHM_DELTA.v3.md",
+      "source_sha256": "b46d210bc3079fe5a9682c6487d98026e0a8849794f44ff872e2c269ff687a42",
+      "redacted_sha256": "5956dbd84fcd97e6822c12f0e647c8c2a5b25d6fa73c02e7abf1c3f924afc8bc"
+    },
+    {
+      "source_file": "reports/QA_FIXTURE.v1.1.md",
+      "archived_file": "reports/QA_FIXTURE.v1.1.md",
+      "source_sha256": "ed9cb549369caeb6ac8e32c166fd10be51457665ed2d8fc5269542f4ea6e33e1",
+      "redacted_sha256": "5084e7b67c0b672ae950f3da4255eec372b5f49e3b2fb5787400f4e54f549a9e"
+    },
+    {
+      "source_file": "reports/QA_FULL.v1.md",
+      "archived_file": "reports/QA_FULL.v1.md",
+      "source_sha256": "448df2c65f380d1440a331408a4542a9f47c2d340e79fecf74b9dbe4b2d4c097",
+      "redacted_sha256": "ebc33e856d9fc3beecd409ba70788b92469a625539171352ecbb4f058edc198e"
+    },
+    {
+      "source_file": "reports/README.md",
+      "archived_file": "reports/README.md",
+      "source_sha256": "15d266f7c06ef9b4e0bd385e55bc81ac7eb33959d9cf3a6df8646711630019af",
+      "redacted_sha256": "15d266f7c06ef9b4e0bd385e55bc81ac7eb33959d9cf3a6df8646711630019af"
+    },
+    {
+      "source_file": "reports/REVIEW.v1.0.md",
+      "archived_file": "reports/REVIEW.v1.0.md",
+      "source_sha256": "0d9cfe2816aa1bca70c4424577acc3598cae3f3908b5a78da00c4a0306040a04",
+      "redacted_sha256": "da4cb1581dcafe8d9c7c3561ef2cfabf3a3c4255ae6a15a0bdf2742e87c54212"
+    },
+    {
+      "source_file": "reports/REVIEW_ALGORITHM_DELTA.v2.md",
+      "archived_file": "reports/REVIEW_ALGORITHM_DELTA.v2.md",
+      "source_sha256": "a4704a7dfb21c2ec1d5403927461776601054f4a539656e76b5bf7d64bb0794a",
+      "redacted_sha256": "15d248323b9ecb109e4a1e715d67424e967c1959a2a78c8ca0e975630ce8ad18"
+    },
+    {
+      "source_file": "reports/REVIEW_FIXTURE.v1.md",
+      "archived_file": "reports/REVIEW_FIXTURE.v1.md",
+      "source_sha256": "340e7b5f7970babb992d77aa1dfa2c9d134bad998e3a7525d5d700b8855ed83f",
+      "redacted_sha256": "c37ddc5811d2eb773c5c197270cd4d642827104035fa37dd092fa137de3eccca"
+    },
+    {
+      "source_file": "reports/REVIEW_FULL.v1.1.md",
+      "archived_file": "reports/REVIEW_FULL.v1.1.md",
+      "source_sha256": "8025107428c8535b34db1a9e2bd1c67dbfc26e0c728a972c489ef5a295e9a4f9",
+      "redacted_sha256": "7951b677603268f135a770f746f1519ee1ee06b4fe51051c29d8d0e5eafae165"
+    },
+    {
+      "source_file": "reports/RUNTIME_COMPARISON.v1.0.md",
+      "archived_file": "reports/RUNTIME_COMPARISON.v1.0.md",
+      "source_sha256": "77086bc5ac65acf6cbad20141fa214677eeb81775048ea77b1974aa0dff0f312",
+      "redacted_sha256": "86b4f1e74dd341929758cc1a0e839ec9e95e35995e7f817c8d7925212818e4b9"
+    },
+    {
+      "source_file": "SHA256SUMS.json",
+      "archived_file": "SHA256SUMS.json",
+      "source_sha256": "ad576dd362946b4b66474e532ab0f30f09f297b51af20fd3f442c557661fb34b",
+      "redacted_sha256": "ad576dd362946b4b66474e532ab0f30f09f297b51af20fd3f442c557661fb34b"
+    },
+    {
+      "source_file": "SKILL.md",
+      "archived_file": "SKILL.md",
+      "source_sha256": "fcc01ddbbbbc44d53e99c0e37e732eb0c1af4d8f0cade2f9a444daeaa0e5b777",
+      "redacted_sha256": "fcc01ddbbbbc44d53e99c0e37e732eb0c1af4d8f0cade2f9a444daeaa0e5b777"
+    },
+    {
+      "source_file": "START_HERE.md",
+      "archived_file": "START_HERE.md",
+      "source_sha256": "382eea7c2483e74d7de85841d41eeb04d2d2e0859ebf73bd0e8cef512c6a6632",
+      "redacted_sha256": "63f30d62c865f7b95f7664636994bbcea03f23fceac9b292ae737a702edbf22f"
+    },
+    {
+      "source_file": "templates/comparison.example.csv",
+      "archived_file": "templates/comparison.example.csv",
+      "source_sha256": "d65c49feca4e883c8511101b44168484f90199ee9bb55666b8505306297d9627",
+      "redacted_sha256": "7f3bd9fe750aa6ec64014c37e9dc42299e68167d53836a06a257b665b8c2685c"
+    },
+    {
+      "source_file": "templates/config.example.json",
+      "archived_file": "templates/config.example.json",
+      "source_sha256": "7757e9e855928b74cae4e32cfe302a1094d65012f3133aef1f04d97c0409cd31",
+      "redacted_sha256": "3c8d86098bee419de8e4ca4da0431b8e40689149add5c76c7c175b2e7e133eb3"
+    },
+    {
+      "source_file": "templates/sheet_schema.json",
+      "archived_file": "templates/sheet_schema.json",
+      "source_sha256": "912c8f26e8ea0a454120d5af6e97a5b7ba33ea7b5533ab3e4bd07e3830854554",
+      "redacted_sha256": "912c8f26e8ea0a454120d5af6e97a5b7ba33ea7b5533ab3e4bd07e3830854554"
+    },
+    {
+      "source_file": "templates/test_record.example.json",
+      "archived_file": "templates/test_record.example.json",
+      "source_sha256": "bf2f4c71193c8b4a55e1fdf2a38cef7586b22109bde5bcf96205c8487d8308f2",
+      "redacted_sha256": "488b8a0f28477ee5fecde72b89eb4efae07d6daf8ef6969d79ca3e41cac1678d"
+    },
+    {
+      "source_file": "templates/test_status.example.csv",
+      "archived_file": "templates/test_status.example.csv",
+      "source_sha256": "690de7c22c6702d71484afbca4c37dbf2e1b9afc13aeec4cb88d09e80184f8d7",
+      "redacted_sha256": "22e52aa7519757475c9d4e1ed1813a0e114bdda0c8a136745b88d435c6f48bc6"
+    },
+    {
+      "source_file": "templates/token_usage.example.csv",
+      "archived_file": "templates/token_usage.example.csv",
+      "source_sha256": "b61c9e2071edaf20d4cea1b67c91f5b48dc13f28439594f546ab23290f986b47",
+      "redacted_sha256": "1dcb989de47416d56078c741dc412cea4899b9be8f340024afff8d7645511b4f"
+    },
+    {
+      "source_file": "TEST_PLAN.v1.0.md",
+      "archived_file": "TEST_PLAN.v1.0.md",
+      "source_sha256": "4f990596e2b9438ff7b11b886949235fae3609ccb0466db4da168fe6af531f01",
+      "redacted_sha256": "91937d703ec242b33efd66796739dea2325847363b0c609f2c400f72d7284642"
+    },
+    {
+      "source_file": "TEST_STATUS.v1.0.md",
+      "archived_file": "TEST_STATUS.v1.0.md",
+      "source_sha256": "c0387dd55602ecad10f1b6646b9e5f499d9efe74b14ad10aec6f41051c4467a3",
+      "redacted_sha256": "f786410f47bc158a862e03b3a351a554b30e8b7a57287662351c82178b0eb6f6"
+    },
+    {
+      "source_file": "tests/synthetic_source.txt",
+      "archived_file": "tests/synthetic_source.txt",
+      "source_sha256": "eb83e0f29cf421f143f2a871bef19823e164f7b36ab94a1d6582c2d369e127b8",
+      "redacted_sha256": "eb83e0f29cf421f143f2a871bef19823e164f7b36ab94a1d6582c2d369e127b8"
+    },
+    {
+      "source_file": "TOKEN_USAGE.v1.0.md",
+      "archived_file": "TOKEN_USAGE.v1.0.md",
+      "source_sha256": "cf4f4942d1cb37715e1067a461be02640521e52435e8aa148faad59aa7348cc2",
+      "redacted_sha256": "cf4f4942d1cb37715e1067a461be02640521e52435e8aa148faad59aa7348cc2"
+    },
+    {
+      "source_file": "USAGE.v1.0.md",
+      "archived_file": "USAGE.v1.0.md",
+      "source_sha256": "88d6648a0218335ecaae6157a91a509e4b2486a7f2308597e1851a1e27f3ab41",
+      "redacted_sha256": "88d6648a0218335ecaae6157a91a509e4b2486a7f2308597e1851a1e27f3ab41"
+    }
+  ],
+  "public_edition_notice": "Personal handwritten quotations removed, session/assistant labels generalized. Raw-source hashes remain historical; redacted_sha256 identifies current public bytes."
+}

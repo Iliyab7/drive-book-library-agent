@@ -1,0 +1,96 @@
+#!/usr/bin/env python3
+"""Build a documentation-only ZIP from an explicit allowlist.
+Run --check for a non-writing validation. Packaging does not deploy or schedule anything.
+"""
+from pathlib import Path
+import argparse, hashlib, json, re, zipfile
+
+ROOT = Path(__file__).resolve().parent
+REQUIRED = [
+    'START_HERE.md', 'OPERATIONS.v1.0.md', 'SKILL.md', 'USAGE.v1.0.md',
+    'RECOVERY_QUEUE.v1.0.md', 'TEST_PLAN.v1.0.md', 'TEST_STATUS.v1.0.md',
+    'COSTS_COMPARISON.v1.0.md', 'TOKEN_USAGE.v1.0.md', 'DEPLOYMENT.v1.0.json', 'CHANGELOG.md',
+    'prompts/SETUP_NEW_ACCOUNT.fa.txt', 'prompts/EXECUTOR.fa.txt',
+    'prompts/REVIEW.fa.txt', 'prompts/QA.fa.txt',
+    'templates/config.example.json', 'templates/sheet_schema.json',
+    'templates/test_record.example.json', 'templates/test_status.example.csv',
+    'templates/comparison.example.csv', 'templates/token_usage.example.csv', 'tests/synthetic_source.txt',
+    'reports/README.md', 'package_release.py.txt',
+]
+OPTIONAL = [
+    'reports/REVIEW.v1.0.md', 'reports/QA.v1.0.md',
+    'reports/CHECKPOINT_RESTORE.v1.0.md', 'reports/RUNTIME_COMPARISON.v1.0.md',
+    'reports/REVIEW_FULL.v1.1.md', 'reports/QA_FULL.v1.md',
+    'reports/REVIEW_FIXTURE.v1.md', 'reports/QA_FIXTURE.v1.1.md',
+    'reports/REVIEW_ALGORITHM_DELTA.v2.md', 'reports/QA_ALGORITHM_DELTA.v3.md',
+]
+# These identify common credential values, not ordinary configuration keys.
+SECRET_PATTERNS = [
+    re.compile(r'-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----'),
+    re.compile(r'\bsk-[A-Za-z0-9_-]{24,}\b'),
+    re.compile(r'\bAIza[A-Za-z0-9_-]{30,}\b'),
+    re.compile(r'\bgh[pousr]_[A-Za-z0-9]{30,}\b'),
+    re.compile(r'\bAKIA[A-Z0-9]{16}\b'),
+]
+
+
+def verify():
+    found = []
+    for name in REQUIRED + OPTIONAL:
+        p = ROOT / name
+        if not p.exists():
+            if name in REQUIRED:
+                raise SystemExit(f'Missing required document: {name}')
+            continue
+        if p.is_symlink() or not p.is_file() or not p.resolve().is_relative_to(ROOT):
+            raise SystemExit(f'Unsafe package member: {name}')
+        data = p.read_bytes()
+        if len(data) > 1_000_000:
+            raise SystemExit(f'Document unexpectedly large; inspect manually: {name}')
+        content = data.decode('utf-8-sig')
+        if p.suffix == '.json':
+            json.loads(content)
+        if any(pattern.search(content) for pattern in SECRET_PATTERNS):
+            raise SystemExit(f'Possible credential detected; inspect manually: {name}')
+        found.append((name, data))
+    manifest = json.loads((ROOT / 'DEPLOYMENT.v1.0.json').read_text())
+    return found, manifest
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--check', action='store_true', help='Validate documents without writing a ZIP.')
+    parser.add_argument('--output', type=Path, help='Destination ZIP, outside the source package directory.')
+    args = parser.parse_args()
+    members, manifest = verify()
+    allowed = set(REQUIRED + OPTIONAL)
+    excluded = sorted(str(p.relative_to(ROOT)) for p in ROOT.rglob('*') if p.is_file() and str(p.relative_to(ROOT)) not in allowed)
+    print(json.dumps({'validated_files': len(members), 'release_status': manifest.get('release_status'), 'excluded_files': excluded}, ensure_ascii=False, indent=2))
+    if args.check:
+        return
+    if not args.output:
+        raise SystemExit('Specify --check or --output DESTINATION.zip.')
+    if manifest.get('release_status') not in {'ready_for_packaging', 'published_documentation'}:
+        raise SystemExit('Release not approved for packaging. Integrate final reports/status first; do not mark unrun tests as passed.')
+    target = args.output.resolve()
+    if target.is_relative_to(ROOT):
+        raise SystemExit('ZIP destination must be outside the source package directory.')
+    if target.exists():
+        raise SystemExit('Destination already exists. Choose a new version; this script does not overwrite it.')
+    checksums = {name: hashlib.sha256(data).hexdigest() for name, data in members}
+    target.parent.mkdir(parents=True, exist_ok=True)
+    with zipfile.ZipFile(target, 'x', zipfile.ZIP_DEFLATED) as z:
+        for name, data in members:
+            z.writestr(f'drive-book-library-v1/{name}', data)
+        z.writestr('drive-book-library-v1/SHA256SUMS.json', json.dumps(checksums, ensure_ascii=False, indent=2) + '\n')
+    with zipfile.ZipFile(target) as z:
+        if z.testzip() is not None:
+            raise SystemExit('ZIP integrity check failed.')
+        for name, expected in checksums.items():
+            if hashlib.sha256(z.read(f'drive-book-library-v1/{name}')).hexdigest() != expected:
+                raise SystemExit(f'ZIP member hash mismatch: {name}')
+    print(f'Created documentation ZIP: {target.name}')
+    print(f'SHA-256: {hashlib.sha256(target.read_bytes()).hexdigest()}')
+
+if __name__ == '__main__':
+    main()

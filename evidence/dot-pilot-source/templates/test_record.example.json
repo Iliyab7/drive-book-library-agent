@@ -1,0 +1,19 @@
+{
+  "test_id": "<T_ID>",
+  "title": "<TITLE>",
+  "input_version": "<VERSION>",
+  "input_sha256": null,
+  "method": "<WHAT_WAS_ACTUALLY_DONE>",
+  "expected": "<ACCEPTANCE_CRITERION>",
+  "observed": null,
+  "coverage": null,
+  "result": "[PILOT_ACCOUNT_REDACTED]",
+  "started_time_utc": null,
+  "finished_time_utc": null,
+  "wall_elapsed_seconds": null,
+  "active_processing_seconds": null,
+  "wait_seconds": null,
+  "evidence_urls": [],
+  "limitations": [],
+  "next_action": null
+}

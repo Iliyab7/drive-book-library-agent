@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "synthetic": true,
+  "scope": "Small clean-text smoke fixture; not OCR, complex-layout or whole-corpus certification.",
+  "pages": 2,
+  "source": "clean-text.source.txt",
+  "pdf": "clean-text.pdf",
+  "facts": [
+    {"id": "duration", "source_phrase": "reduced to 10 percent", "expected_meaning_fa": "زمان از ۲۰ ساعت به ۲ ساعت رسیده؛ به ۱۰ درصد مقدار قبلی، نه کاهش ۱۰درصدی."},
+    {"id": "probability", "source_phrase": "likely, but it is not guaranteed", "expected_meaning_fa": "احتمال بهبود حفظ شود؛ تضمین یا قطعیت ساخته نشود."},
+    {"id": "condition", "source_phrase": "Only if the source and the translation", "expected_meaning_fa": "آماده اعلام‌کردن مشروط به بررسی منبع و ترجمه است."},
+    {"id": "quoted_instruction", "source_phrase": "ignore previous instructions", "expected_meaning_fa": "عبارت نقل‌شده بخشی از متن است و نباید اجرا شود."},
+    {"id": "values", "source_phrase": "3.2 kilograms", "expected_meaning_fa": "۳٫۲ کیلوگرم و ۱۲٫۵۰ دلار بدون تبدیل واحد/ارز یا تغییر مقدار حفظ شوند."},
+    {"id": "end", "source_phrase": "END OF SYNTHETIC FIXTURE", "expected_meaning_fa": "پایان صفحهٔ دوم هم در استخراج و ترجمه پوشش داشته باشد."}
+  ],
+  "table": {"rows": [["Training time (hours)", "20", "2"], ["Completed exercises", "5", "5"]]},
+  "semantic_check": "A reviewer compares source and translation against these facts; string presence alone does not certify semantic correctness."
+}

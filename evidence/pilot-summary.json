@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "observed_on": "2026-10-20",
+  "timezone": "Asia/Tehran",
+  "scope": "Pilot history and evidence boundaries, not acceptance for a recipient account.",
+  "baseline": {
+    "kind": "independent-artifact-review",
+    "report": "baseline-review.json",
+    "pages": 162,
+    "aligned_blocks": 1425,
+    "core_semantic_samples": 105,
+    "verdict": "Positive baseline with minor findings; not full semantic certification."
+  },
+  "skill_and_catalog": {
+    "kind": "observed-dot-report",
+    "result": "Dot reported saving and rereading the skill and creating a master sheet with catalog, processing and guide tabs.",
+    "independent_destination_readback": false
+  },
+  "second_test": {
+    "kind": "observed-dot-report",
+    "pdf_pages": 31,
+    "content": "Scanned Persian/English articles, worksheets and handwriting.",
+    "state": "Final readable-content version delivered; four source handwriting gaps remain. Dot Review reports 589 aligned slots and 565 semantic pairs; QA reports full structural checks and 39 semantic samples from 13 pages. Claims are read from actual archived reports, not independently repeated here.",
+    "independent_final_artifact_review": false,
+    "reports": "dot-pilot-source/reports/REVIEW_FULL.v1.1.md and QA_FULL.v1.md"
+  },
+  "review_and_qa": {
+    "kind": "observed-dot-report",
+    "result": "Two separate Review and QA agents reported started, with reports tied to artifact hashes.",
+    "final_reports_independently_fetched": false
+  },
+  "hourly_smoke": {
+    "kind": "observed-dot-report",
+    "result": "A synthetic one-page TEST PDF was reported detected without a new user message during the scheduled run, translated, independently reviewed and read back from Drive.",
+    "scope_limit": "One reported small cycle; raw execution logs, output and device independence were not independently verified.",
+    "measured_reported_times_utc": {
+      "first_seen": "2026-10-20T11:30:47Z",
+      "processing_started": "2026-10-20T11:31:21Z",
+      "destination_qa_done": "2026-10-20T11:35:38Z"
+    }
+  },
+  "targeted_correction": {
+    "kind": "observed-dot-report",
+    "result": "Version 3 index-format correction accepted in Dot QA; source and target hashes recorded in QA_ALGORITHM_DELTA.v3.md. Original baseline preserved; this is a formatting delta review, not a full new translation review.",
+    "baseline_review_does_not_transfer_to_new_bytes": true
+  },
+  "token_accounting": {
+    "kind": "observed-dot-report",
+    "result": "Per-book token and measurement-coverage columns reported added. Actual totals for previous books and exact current model identity were unavailable and recorded as unknown."
+  },
+  "access_boundary": "Initially the reviewer connector lacked access. A newly available account-specific Drive connection subsequently downloaded the Dot report bundle and verified its package integrity. Actual recipient setup and the book-processing claims were not independently replayed.",
+  "not_proven": [
+    "Long-term unattended continuity",
+    "Full OCR/final second-test quality",
+    "Multibook queue and interruption recovery",
+    "Pure harness comparison",
+    "Exact current model/runtime and complete token costs",
+    "Fresh-account setup acceptance"
+  ],
+  "dot_bundle": {
+    "kind": "downloaded-report-package",
+    "archive": "dot-pilot-source/README-SOURCE-FA.md",
+    "zip_sha256": "9faeaf338cfc9b8529a355c034f0b27318452903752126a02dcb687ea42f8914",
+    "verified_manifest_files": 34,
+    "reports_read": true,
+    "independent_repeat_of_book_processing": false
+  },
+  "checkpoint_restore": {
+    "kind": "archived-dot-report",
+    "manifest_files": 52,
+    "aligned_ids": 589,
+    "completed_translation_chunks_reused": 5,
+    "translation_model_calls_during_restore": 0,
+    "scope": "Two controlled restores of a completed checkpoint into empty folders; not live crash/interrupted-translation recovery."
+  }
+}

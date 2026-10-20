@@ -1,0 +1,13 @@
+SYNTHETIC FIXTURE — Original test content, not a book excerpt.
+
+Section 1: Conditional planning
+If delivery takes more than 3 days, do not promise arrival by Friday.
+A forecast may improve, but it is not a guarantee.
+The sample budget is 125.50 units for 5 items.
+
+بخش ۲: متن فارسی موجود
+این جمله از ابتدا فارسی است و نباید بی‌دلیل بازنویسی شود.
+اگر دما کمتر از ۱۰ درجه باشد، مرحلهٔ دوم اجرا نمی‌شود.
+
+Section 3: Source uncertainty
+[Unreadable source span: do not guess.]
