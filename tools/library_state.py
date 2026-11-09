@@ -20,6 +20,30 @@ def migrate_config(old: dict) -> dict:
     if version not in (1, 2):
         raise ValueError('unsupported configuration schema')
     result = deepcopy(old)
+    memory = result.setdefault('memory', {})
+    defaults = {'instruction_storage': 'full_text_in_master_sheet',
+                'source_repository_read_policy': 'install_or_explicit_upgrade_only',
+                'active_method_record_id': 'active_method', 'config_selection': 'version_bound_manifest',
+                'active_memory_revision': None}
+    memory_changed = any(key not in memory for key in defaults)
+    for key, value in defaults.items():
+        memory.setdefault(key, value)
+    for key in ('instruction_storage', 'source_repository_read_policy', 'config_selection'):
+        if memory[key] != defaults[key]:
+            memory[key] = defaults[key]
+            memory_changed = True
+    for field, required in {
+        'read_at_every_turn': ['active_method', 'version_bound_config', 'full_active_instruction_text', 'relevant_runs', 'checkpoint', 'recent_events'],
+        'instruction_components': ['skill', 'workflow', 'coordinator', 'review', 'qa', 'reading_tools', 'memory_protocol'],
+    }.items():
+        values = memory.setdefault(field, [])
+        for value in required:
+            if value not in values:
+                values.append(value)
+                memory_changed = True
+    if memory_changed:
+        result['migration_status'] = 'pending_readback_and_sample'
+        result['activation_verified'] = False
     if version == 2:
         return result
     result['schema_version'] = 2

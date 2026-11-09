@@ -83,7 +83,8 @@
         "reading_status",
         "sync_state",
         "last_event_id",
-        "checkpoint_revision"
+        "checkpoint_revision",
+        "memory_revision"
       ]
     },
     {
@@ -114,7 +115,8 @@
         "reading_print_status",
         "html_hash",
         "print_engine",
-        "reviewed_contiguous_ranges"
+        "reviewed_contiguous_ranges",
+        "memory_revision"
       ]
     },
     {
@@ -138,7 +140,18 @@
         "schema_version",
         "active_package_hash",
         "locations_and_capabilities",
-        "activation_readback_at"
+        "activation_readback_at",
+        "record_type",
+        "record_content_json",
+        "memory_revision",
+        "component_id",
+        "chunk_index",
+        "instruction_text",
+        "bundle_sha256",
+        "activation_status",
+        "previous_memory_revision",
+        "config_record_id",
+        "config_sha256"
       ]
     },
     {

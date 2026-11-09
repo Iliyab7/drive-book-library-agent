@@ -38,5 +38,6 @@
     "limitations": []
   },
   "event_id": null,
-  "sync_state": "not_recorded"
+  "sync_state": "not_recorded",
+  "memory_revision": null
 }

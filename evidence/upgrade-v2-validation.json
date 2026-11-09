@@ -12,11 +12,19 @@
     "pushed": false
   },
   "checks": {
-    "unit_suite": {"result": "pass", "tests": 31, "scope": "offline synthetic/unit and package/privacy checks", "dependencies": "pypdf 6.10.0, markdown-it-py 4.0.0, mdit-py-plugins 0.5.0"},
-    "bundle_validation": "pass: final file inventory/hashes, UTF-8, references, privacy patterns, versions, 22 acceptance identities and append-only event schema",
+    "unit_suite": {
+      "result": "pass",
+      "tests": 36,
+      "scope": "offline synthetic/unit and package/privacy checks",
+      "dependencies": "pypdf 6.10.0, markdown-it-py 4.0.0, mdit-py-plugins 0.5.0"
+    },
+    "bundle_validation": "pass: final file inventory/hashes, UTF-8, references, privacy patterns, versions, 23 acceptance identities and append-only event schema",
     "browser": {
       "engine": "Chromium 151.0.7922.34",
-      "viewports": ["1200x1000", "390x844"],
+      "viewports": [
+        "1200x1000",
+        "390x844"
+      ],
       "issues": [],
       "network_requests": 0,
       "html_sha256": "bc08368f00da12d591823e9294477e742cb2974424edbb23ca596b9c4c52b241",
@@ -38,7 +46,7 @@
         "tools/library_state.py": "cac1679fcbe3c5ed82db3578ff158771fefb9250081f09940482a27704853d90",
         "tools/check_reading.mjs": "c3df81259fdd2a4c56871e64eb5e9daaeb287ff77923d69f0ad91e6755bdcda8"
       },
-      "limits": "No live account, model translation benchmark, visual print or final manifest review by this role."
+      "limits": "No live account, model translation benchmark, visual print or final manifest review by this role. Its tool hashes above identify the initial pre-clarification review; the full_instruction_memory section records the subsequent memory-only recheck."
     },
     "independent_qa": {
       "actor": "separate QA context",
@@ -50,6 +58,24 @@
       "network_requests": 0,
       "open_material_findings": 0,
       "limits": "Synthetic prewritten translation and template only; no live account or model translation quality check."
+    },
+    "full_instruction_memory": {
+      "scope": "offline synthetic memory installation/startup; no live Sheets write",
+      "source_repository_policy": "install_or_explicit_upgrade_only",
+      "full_components": 7,
+      "config": "version-bound ID and content hash in the same manifest",
+      "startup_without_repository_io": "pass",
+      "missing_corrupt_duplicate_or_empty_instruction_text": "rejected",
+      "missing_changed_or_wrong_version_config": "rejected",
+      "staged_upgrade_and_rollback_preserve_old_method_and_config": "pass",
+      "legacy_memory_migration": "additive with custom fields preserved; incomplete activation stays pending",
+      "independent_review_targeted_tests": 11,
+      "independent_qa_targeted_tests": 11,
+      "open_material_findings": 0,
+      "hashes": {
+        "tools/instruction_memory.py": "c563496158ac2acbbfd4a245fdb53dc41465e2e10951d4ec47824dd5f460d7c3",
+        "tools/library_state.py": "b1a3bf1ae78533b5d59122e2480645d1731b388ff11633850bc37264bf436214"
+      }
     }
   },
   "not_run": [

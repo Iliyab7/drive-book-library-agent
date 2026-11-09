@@ -83,7 +83,7 @@ def validate(root: Path) -> list[str]:
     if acceptance.is_file():
         rows = list(csv.reader(io.StringIO(acceptance.read_text(encoding='utf-8-sig'))))
         identities = [row[0] for row in rows[1:] if row]
-        expected = {f'AT{number:02}' for number in range(1, 23)}
+        expected = {f'AT{number:02}' for number in range(1, 24)}
         if len(identities) != len(set(identities)) or set(identities) != expected:
             errors.append('acceptance identities incomplete or duplicated')
         if not rows or any(len(row) != 8 for row in rows):
@@ -97,10 +97,16 @@ def validate(root: Path) -> list[str]:
             errors.append('package/schema version mismatch')
         if config.get('locations', {}).get('shared_memory', {}).get('same_container_as_catalog') is not True:
             errors.append('default memory must share master catalog container')
+        memory = config.get('memory', {})
+        if memory.get('instruction_storage') != 'full_text_in_master_sheet' or memory.get('source_repository_read_policy') != 'install_or_explicit_upgrade_only' or memory.get('config_selection') != 'version_bound_manifest':
+            errors.append('complete deployed instruction memory required')
     if isinstance(schema, dict):
         events = next((t for t in schema.get('tabs', []) if t.get('key') == 'events'), {})
         if events.get('row_identity') != 'event_id' or events.get('append_only') is not True:
             errors.append('append-only event identity required')
+        method = next((t for t in schema.get('tabs', []) if t.get('key') == 'method'), {})
+        if not {'memory_revision', 'instruction_text', 'record_content_json', 'chunk_index'}.issubset(method.get('fields', [])):
+            errors.append('full method text fields required')
     if isinstance(manifest, dict) and isinstance(manifest.get('files'), dict):
         entries = manifest['files']
         actual = {p.relative_to(root).as_posix(): p for p in paths if p.name != 'MANIFEST.json'}

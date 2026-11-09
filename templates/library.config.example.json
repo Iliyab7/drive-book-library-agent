@@ -78,15 +78,30 @@
     "writer": "coordinator",
     "events_tab": "رویدادها",
     "read_at_every_turn": [
-      "config",
-      "effective_method",
+      "active_method",
+      "version_bound_config",
+      "full_active_instruction_text",
       "relevant_runs",
       "checkpoint",
       "recent_events"
     ],
     "offline_outbox_reference": null,
     "sync_state": "unconfigured",
-    "success_requires_readback": true
+    "success_requires_readback": true,
+    "instruction_storage": "full_text_in_master_sheet",
+    "active_method_record_id": "active_method",
+    "source_repository_read_policy": "install_or_explicit_upgrade_only",
+    "instruction_components": [
+      "skill",
+      "workflow",
+      "coordinator",
+      "review",
+      "qa",
+      "reading_tools",
+      "memory_protocol"
+    ],
+    "active_memory_revision": null,
+    "config_selection": "version_bound_manifest"
   },
   "capabilities": {
     "preserve_original_files": "unverified",

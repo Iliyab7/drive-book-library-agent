@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "id": "20261109T154309Z-full-instructions-in-memory",
+  "repository": "Iliyab7/drive-book-library-agent",
+  "occurred_at": "2026-11-09T15:43:09Z",
+  "title": "Keep the complete installed runbook in shared operational memory",
+  "summary": "Owner clarified that GitHub is read at install or explicit upgrade, while every routine turn must recover all requirements, stages and role instructions from the master spreadsheet itself.",
+  "outcome": "Added full-text instruction packets, version-bound operational config, staged/readback activation and a repository-free startup loader. Separate Review and QA each passed 11 targeted tests with no open material findings. Live memory installation remains for the deployed agent; publication is separately authorized by the owner.",
+  "status": "local-tested",
+  "decisions": [
+    "Store all seven full instruction components and the operational configuration in the same master shared-memory container, rather than saving only source links.",
+    "Bind method text and configuration snapshot to one revision/hash manifest so upgrade and rollback select a consistent pair.",
+    "Read the source repository only at installation or explicit upgrade; routine startup reads the active memory revision and relevant state/checkpoint/events.",
+    "Preserve previous instruction/config revisions and book data; incomplete memory blocks dependent work instead of inventing a procedure from chat."
+  ],
+  "blockers": [],
+  "next_actions": [
+    "Publish the tested version 2 package following the owner's authorization and verify the remote commit and CI.",
+    "Have the deployed agent perform the documented installation/upgrade and read back the complete method/config in its own private master sheet."
+  ],
+  "evidence": ["tools/instruction_memory.py", "tests/test_instruction_memory.py", "prompts/RUN-FA.txt", "docs/STATE-AND-DESTINATIONS-FA.md", "acceptance/ACCEPTANCE-FA.csv"]
+}

@@ -24,6 +24,19 @@ def event(key,kind='checkpoint'):
 
 
 class StateTests(unittest.TestCase):
+    def test_legacy_v2_memory_migrates_full_startup_additively(self):
+        old={'schema_version':2,'package_version':'2.0.0','activation_verified':True,
+             'memory':{'instruction_storage':'links_only','read_at_every_turn':['custom_check','config'],'custom_setting':'keep'}}
+        updated=migrate_config(old)
+        self.assertFalse(updated['activation_verified'])
+        self.assertEqual(updated['memory']['custom_setting'],'keep')
+        self.assertIn('custom_check',updated['memory']['read_at_every_turn'])
+        self.assertIn('full_active_instruction_text',updated['memory']['read_at_every_turn'])
+        self.assertIn('version_bound_config',updated['memory']['read_at_every_turn'])
+        self.assertEqual(len(updated['memory']['instruction_components']),7)
+        self.assertEqual(updated['memory']['instruction_storage'],'full_text_in_master_sheet')
+        self.assertEqual(migrate_config(updated),updated)
+        self.assertTrue(old['activation_verified'])
     def test_offline_migration_preserves_old_ids_unknown_fields_and_history(self):
         old={'schema_version':1,'package_version':'1.0.0','spreadsheet_url':'synthetic-sheet','root_folder_url':'synthetic-root',
              'system_folder_url':'synthetic-system','custom':{'keep':True},'schedule':{'id':'existing','notification_destination':'existing-destination'},'readiness':{'ready_for_pdf':True}}
