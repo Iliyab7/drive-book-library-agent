@@ -18,7 +18,7 @@ class KitTests(unittest.TestCase):
     def setUp(self) -> None:
         self.temporary = tempfile.TemporaryDirectory()
         self.root = Path(self.temporary.name) / 'kit'
-        shutil.copytree(ROOT, self.root, ignore=shutil.ignore_patterns('__pycache__', '.git'))
+        shutil.copytree(ROOT, self.root, ignore=shutil.ignore_patterns('__pycache__', '.git', 'runtime', '.runtime', '.venv', 'private'))
 
     def tearDown(self) -> None:
         self.temporary.cleanup()
@@ -92,6 +92,17 @@ class KitTests(unittest.TestCase):
         with (self.root / 'README.md').open('a', encoding='utf-8') as handle:
             handle.write('\nA changed artifact.\n')
         self.assertTrue(any('manifest hash' in e for e in validate(self.root)))
+
+    def test_version_mismatch_and_mutable_events_rejected(self) -> None:
+        path = self.root / 'templates' / 'library.config.example.json'
+        data = json.loads(path.read_text(encoding='utf-8')); data['package_version'] = '1.0.0'
+        path.write_text(json.dumps(data), encoding='utf-8')
+        self.assertTrue(any('version mismatch' in e for e in validate(self.root)))
+        path = self.root / 'templates' / 'sheets.schema.json'
+        data = json.loads(path.read_text(encoding='utf-8'))
+        next(t for t in data['tabs'] if t['key'] == 'events')['append_only'] = False
+        path.write_text(json.dumps(data), encoding='utf-8')
+        self.assertTrue(any('event identity' in e for e in validate(self.root)))
 
 
 if __name__ == '__main__':

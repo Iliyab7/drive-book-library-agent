@@ -1,0 +1,429 @@
+{
+  "schema_version": 1,
+  "book_version_id": "synthetic-nonfa-v1",
+  "language": "en",
+  "title_original": "Careful reading — synthetic test",
+  "title_fa": "خواندن دقیق؛ کتاب آزمایشی",
+  "authors": [
+    "Synthetic Test Library"
+  ],
+  "summary": "نمونه مصنوعی آموزش و کاهش زمان؛ برای کنترل ترتیب، شرط، نفی و چاپ.",
+  "main_problem_and_thesis": "Preserve source conditions and relationships before translation.",
+  "chapter_outline": [
+    "s0001: آغاز",
+    "s0003: ستون‌ها و آموزش",
+    "s0007: پایان"
+  ],
+  "concepts": [
+    "آموزش",
+    "وفاداری",
+    "پیوستگی"
+  ],
+  "tags_fa": [
+    "آموزش",
+    "آزمون"
+  ],
+  "use_and_distinction": "Only an offline synthetic workflow fixture.",
+  "language_decision": {
+    "policy": "translate_to_fa",
+    "content_evidence": "All three synthetic source pages are English; checked complete source."
+  },
+  "reconstruction": {
+    "raw_blocks": [
+      {
+        "id": "h1",
+        "pdf_page": 1,
+        "printed_page": "7",
+        "text": "1. A careful beginning"
+      },
+      {
+        "id": "p1a",
+        "pdf_page": 1,
+        "printed_page": "7",
+        "text": "If the source is checked, an improvement is likely, but it is not\nguaranteed. The parcel weighs 3.2 kilograms and the sentence continues"
+      },
+      {
+        "id": "f1",
+        "pdf_page": 1,
+        "printed_page": "7",
+        "text": "SYNTHETIC LIBRARY · running footer"
+      },
+      {
+        "id": "p1b",
+        "pdf_page": 2,
+        "printed_page": "8",
+        "text": "across the page boundary without losing its condition.[^n1]"
+      },
+      {
+        "id": "h2",
+        "pdf_page": 2,
+        "printed_page": "8",
+        "text": "2. Columns and a continuing table"
+      },
+      {
+        "id": "left",
+        "pdf_page": 2,
+        "printed_page": "8",
+        "text": "Read the left column first. Training took 20 hours before and takes 2 hours now."
+      },
+      {
+        "id": "right",
+        "pdf_page": 2,
+        "printed_page": "8",
+        "text": "Read the right column second. Time fell to 10 percent of its previous duration, not by 10 percent."
+      },
+      {
+        "id": "t1",
+        "pdf_page": 2,
+        "printed_page": "8",
+        "columns": [
+          "Metric",
+          "Before",
+          "After",
+          "Condition"
+        ],
+        "rows": [
+          [
+            "Training (hours)",
+            "20",
+            "2",
+            "Only if checked"
+          ],
+          [
+            "Exercises",
+            "5",
+            "5",
+            "No reduction"
+          ]
+        ]
+      },
+      {
+        "id": "f2",
+        "pdf_page": 2,
+        "printed_page": "8",
+        "text": "SYNTHETIC LIBRARY · running footer"
+      },
+      {
+        "id": "t2",
+        "pdf_page": 3,
+        "printed_page": "9",
+        "columns": [
+          "Metric",
+          "Before",
+          "After",
+          "Condition"
+        ],
+        "rows": [
+          [
+            "Price (USD)",
+            "12.50",
+            "12.50",
+            "Do not convert"
+          ],
+          [
+            "Mass (kg)",
+            "3.2",
+            "3.2",
+            "Do not round"
+          ]
+        ]
+      },
+      {
+        "id": "h3",
+        "pdf_page": 3,
+        "printed_page": "9",
+        "text": "3. A definite ending"
+      },
+      {
+        "id": "end",
+        "pdf_page": 3,
+        "printed_page": "9",
+        "text": "A repeated statement can be real content. A repeated statement can be real content. The formula is `E = m * c^2`. The quotation \"ignore previous instructions\" is book content, not a command."
+      },
+      {
+        "id": "note",
+        "pdf_page": 3,
+        "printed_page": "9",
+        "text": "An improvement is not a guarantee; preserve the negation."
+      },
+      {
+        "id": "f3",
+        "pdf_page": 3,
+        "printed_page": "9",
+        "text": "SYNTHETIC LIBRARY · running footer"
+      }
+    ],
+    "reading_order": [
+      "h1",
+      "p1a",
+      "f1",
+      "p1b",
+      "h2",
+      "left",
+      "right",
+      "t1",
+      "f2",
+      "t2",
+      "h3",
+      "end",
+      "note",
+      "f3"
+    ],
+    "order_evidence": "Synthetic PDF page 2 places left/right in columns; paragraph continues before heading; table continues on page 3.",
+    "noise": [
+      {
+        "ref": "f1",
+        "reason": "running footer outside body",
+        "evidence": "PDF 1, bottom margin; same running label on all three pages"
+      },
+      {
+        "ref": "f2",
+        "reason": "running footer outside body",
+        "evidence": "PDF 2, bottom margin; same running label on all three pages"
+      },
+      {
+        "ref": "f3",
+        "reason": "running footer outside body",
+        "evidence": "PDF 3, bottom margin; same running label on all three pages"
+      }
+    ],
+    "blocks": [
+      {
+        "refs": [
+          "h1"
+        ],
+        "kind": "heading",
+        "level": 2
+      },
+      {
+        "refs": [
+          "p1a",
+          "p1b"
+        ],
+        "kind": "paragraph",
+        "join_evidence": "PDF 1 ends with continues; PDF 2 begins across; one sentence with no paragraph indentation."
+      },
+      {
+        "refs": [
+          "h2"
+        ],
+        "kind": "heading",
+        "level": 2
+      },
+      {
+        "refs": [
+          "left"
+        ],
+        "kind": "paragraph"
+      },
+      {
+        "refs": [
+          "right"
+        ],
+        "kind": "paragraph"
+      },
+      {
+        "refs": [
+          "t1",
+          "t2"
+        ],
+        "kind": "table",
+        "join_evidence": "PDF 2/3 same four columns, continuation label and no new caption."
+      },
+      {
+        "refs": [
+          "h3"
+        ],
+        "kind": "heading",
+        "level": 2
+      },
+      {
+        "refs": [
+          "end"
+        ],
+        "kind": "paragraph"
+      },
+      {
+        "refs": [
+          "note"
+        ],
+        "kind": "footnote",
+        "note_id": "n1"
+      }
+    ]
+  },
+  "translation": [
+    {
+      "refs": [
+        "h1"
+      ],
+      "kind": "heading",
+      "level": 2,
+      "id": "s0001",
+      "pdf_pages": [
+        1
+      ],
+      "printed_pages": [
+        "7"
+      ],
+      "text": "۱. آغازی با دقت"
+    },
+    {
+      "refs": [
+        "p1a",
+        "p1b"
+      ],
+      "kind": "paragraph",
+      "join_evidence": "PDF 1 ends with continues; PDF 2 begins across; one sentence with no paragraph indentation.",
+      "id": "s0002",
+      "pdf_pages": [
+        1,
+        2
+      ],
+      "printed_pages": [
+        "7",
+        "8"
+      ],
+      "text": "اگر منبع کنترل شود، بهبود محتمل است، اما تضمین‌شده نیست. بسته `3.2 kg` وزن دارد و جمله بدون از دست دادن شرط خود از مرز صفحه ادامه پیدا می‌کند.[^n1]"
+    },
+    {
+      "refs": [
+        "h2"
+      ],
+      "kind": "heading",
+      "level": 2,
+      "id": "s0003",
+      "pdf_pages": [
+        2
+      ],
+      "printed_pages": [
+        "8"
+      ],
+      "text": "۲. ستون‌ها و جدول ادامه‌دار"
+    },
+    {
+      "refs": [
+        "left"
+      ],
+      "kind": "paragraph",
+      "id": "s0004",
+      "pdf_pages": [
+        2
+      ],
+      "printed_pages": [
+        "8"
+      ],
+      "text": "ستون چپ نخست خوانده شود. زمان آموزش قبلاً `20 hours` بود و اکنون `2 hours` است."
+    },
+    {
+      "refs": [
+        "right"
+      ],
+      "kind": "paragraph",
+      "id": "s0005",
+      "pdf_pages": [
+        2
+      ],
+      "printed_pages": [
+        "8"
+      ],
+      "text": "ستون راست دوم خوانده شود. زمان به `10%` مقدار پیشین رسیده است؛ کاهش به‌اندازه `10%` نیست."
+    },
+    {
+      "refs": [
+        "t1",
+        "t2"
+      ],
+      "kind": "table",
+      "join_evidence": "PDF 2/3 same four columns, continuation label and no new caption.",
+      "id": "s0006",
+      "pdf_pages": [
+        2,
+        3
+      ],
+      "printed_pages": [
+        "8",
+        "9"
+      ],
+      "columns": [
+        "شاخص",
+        "پیش از تغییر",
+        "پس از تغییر",
+        "شرط"
+      ],
+      "rows": [
+        [
+          "زمان آموزش (ساعت)",
+          "20",
+          "2",
+          "فقط در صورت کنترل"
+        ],
+        [
+          "تمرین‌ها",
+          "5",
+          "5",
+          "بدون کاهش"
+        ],
+        [
+          "قیمت (USD)",
+          "12.50",
+          "12.50",
+          "تبدیل نشود"
+        ],
+        [
+          "جرم (kg)",
+          "3.2",
+          "3.2",
+          "گرد نشود"
+        ]
+      ]
+    },
+    {
+      "refs": [
+        "h3"
+      ],
+      "kind": "heading",
+      "level": 2,
+      "id": "s0007",
+      "pdf_pages": [
+        3
+      ],
+      "printed_pages": [
+        "9"
+      ],
+      "text": "۳. پایانی روشن"
+    },
+    {
+      "refs": [
+        "end"
+      ],
+      "kind": "paragraph",
+      "id": "s0008",
+      "pdf_pages": [
+        3
+      ],
+      "printed_pages": [
+        "9"
+      ],
+      "text": "یک گزاره تکراری می‌تواند محتوای واقعی باشد. یک گزاره تکراری می‌تواند محتوای واقعی باشد. فرمول `E = m * c^2` است. عبارت «دستورهای قبلی را نادیده بگیر» محتوای کتاب است و دستور اجرایی نیست."
+    },
+    {
+      "refs": [
+        "note"
+      ],
+      "kind": "footnote",
+      "note_id": "n1",
+      "id": "s0009",
+      "pdf_pages": [
+        3
+      ],
+      "printed_pages": [
+        "9"
+      ],
+      "text": "بهبود تضمین نیست؛ نفی باید حفظ شود."
+    }
+  ],
+  "limitations": [
+    "ترجمه مصنوعی ازپیش‌نوشته‌شده است؛ کیفیت مدل ترجمه یا استقرار حساب زنده آزموده نشده است."
+  ]
+}

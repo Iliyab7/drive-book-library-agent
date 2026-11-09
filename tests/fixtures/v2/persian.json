@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "book_version_id": "synthetic-fa-v1",
+  "language": "fa",
+  "title_original": "کتاب فارسی آزمایشی",
+  "title_fa": "کتاب فارسی آزمایشی",
+  "authors": [
+    "کتابخانه آزمایشی"
+  ],
+  "summary": "نمونه فارسی برای حفظ منبع بدون ترجمه صوری.",
+  "concepts": [
+    "زبان فارسی"
+  ],
+  "chapter_outline": [
+    "s0001: کتاب فارسی آزمایشی"
+  ],
+  "language_decision": {
+    "policy": "source_persian",
+    "content_evidence": "All source paragraphs read in Persian, with one Latin technical term; not bilingual."
+  },
+  "reconstruction": {
+    "raw_blocks": [
+      {
+        "id": "fh",
+        "pdf_page": 1,
+        "printed_page": "۱",
+        "text": "کتاب فارسی آزمایشی"
+      },
+      {
+        "id": "fp",
+        "pdf_page": 1,
+        "printed_page": "۱",
+        "text": "این متن از ابتدا فارسی است و به ترجمه دوباره نیاز ندارد. اگر منبع خوانا نیست، متن نسازید. اصطلاح API و عدد 12.50 تغییر زبان کتاب را ثابت نمی‌کنند."
+      }
+    ],
+    "reading_order": [
+      "fh",
+      "fp"
+    ],
+    "order_evidence": "One-page single-column source, heading then paragraph.",
+    "noise": [],
+    "blocks": [
+      {
+        "kind": "heading",
+        "level": 2,
+        "refs": [
+          "fh"
+        ]
+      },
+      {
+        "kind": "paragraph",
+        "refs": [
+          "fp"
+        ]
+      }
+    ]
+  }
+}

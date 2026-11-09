@@ -1,8 +1,8 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "template_only": true,
   "workflow": "drive-book-library",
-  "package_version": "1.0.0",
+  "package_version": "2.0.0",
   "account_verified": false,
   "root_folder_url": null,
   "inbox_url": null,
@@ -14,8 +14,90 @@
   "review_prompt_url": null,
   "qa_prompt_url": null,
   "config_url": null,
-  "runtime": {"coordinator": null, "execution_environment": null, "requires_local_device_online": null, "review_delegation_verified": false, "qa_delegation_verified": false},
-  "coordination": {"controller_reference": null, "serialization_mechanism": null, "serialization_verified": false, "unknown_worker_policy": "hold_and_notify"},
-  "schedule": {"timezone": "Asia/Tehran", "cadence": "hourly", "id": null, "active_readback_at": null, "next_run_at": null, "observed_run_at": null, "notification_destination": "originating ChatGPT conversation"},
-  "readiness": {"ready_for_pdf": false, "automated_cycle_observed": false, "blockers": []}
+  "runtime": {
+    "coordinator": null,
+    "execution_environment": null,
+    "requires_local_device_online": null,
+    "review_delegation_verified": false,
+    "qa_delegation_verified": false
+  },
+  "coordination": {
+    "controller_reference": null,
+    "serialization_mechanism": null,
+    "serialization_verified": false,
+    "unknown_worker_policy": "hold_and_notify"
+  },
+  "schedule": {
+    "timezone": "Asia/Tehran",
+    "cadence": "hourly",
+    "id": null,
+    "active_readback_at": null,
+    "next_run_at": null,
+    "observed_run_at": null,
+    "notification_destination": null
+  },
+  "readiness": {
+    "ready_for_pdf": false,
+    "automated_cycle_observed": false,
+    "blockers": []
+  },
+  "locations": {
+    "files": {
+      "provider": "google_drive",
+      "reference": null
+    },
+    "catalog": {
+      "provider": "google_sheets",
+      "reference": null
+    },
+    "shared_memory": {
+      "provider": "google_sheets",
+      "reference": null,
+      "same_container_as_catalog": true
+    },
+    "checkpoints": {
+      "provider": "google_drive",
+      "reference": null
+    }
+  },
+  "activation_verified": false,
+  "output_policy": {
+    "source_persian": [
+      "original.pdf",
+      "original.md"
+    ],
+    "translate_to_fa": [
+      "original.pdf",
+      "original.md",
+      "translation.fa.md",
+      "translation.fa.html"
+    ],
+    "mixed_selective": "preserve existing Persian; translate only witnessed foreign-language sections"
+  },
+  "memory": {
+    "writer": "coordinator",
+    "events_tab": "رویدادها",
+    "read_at_every_turn": [
+      "config",
+      "effective_method",
+      "relevant_runs",
+      "checkpoint",
+      "recent_events"
+    ],
+    "offline_outbox_reference": null,
+    "sync_state": "unconfigured",
+    "success_requires_readback": true
+  },
+  "capabilities": {
+    "preserve_original_files": "unverified",
+    "readback_files": "unverified",
+    "search_all_records": "unverified",
+    "stable_version_ids": "unverified",
+    "append_events": "unverified",
+    "recover_checkpoints": "unverified",
+    "scheduler": "unverified",
+    "independent_review": "unverified",
+    "independent_qa": "unverified",
+    "serialization": "unverified"
+  }
 }

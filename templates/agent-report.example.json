@@ -1,14 +1,42 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "template_only": true,
   "report_id": null,
   "run_id": null,
   "role": null,
   "session_reference": null,
-  "artifact_hashes": {"original.pdf": null, "original.md": null, "translation.fa.md": null},
-  "coverage": {"kind": "not_run", "pages_or_sections": [], "selection_reason": null, "limitations": []},
+  "artifact_hashes": {
+    "original.pdf": null,
+    "original.md": null,
+    "translation.fa.md": null,
+    "translation.fa.html": null
+  },
+  "coverage": {
+    "kind": "not_run",
+    "pages_or_sections": [],
+    "selection_reason": null,
+    "limitations": []
+  },
   "checks": [],
   "findings": [],
   "verdict": "not_run",
-  "next_action": null
+  "next_action": null,
+  "book_version_id": null,
+  "language_policy": null,
+  "translation_status": "not_run",
+  "quality_axes": {
+    "coverage": "not_run",
+    "fidelity": "not_run",
+    "structure": "not_run",
+    "reading_print": "not_run"
+  },
+  "reading_print": {
+    "engine": null,
+    "pdf_hash": null,
+    "all_print_pages_viewed": false,
+    "contiguous_ranges": [],
+    "limitations": []
+  },
+  "event_id": null,
+  "sync_state": "not_recorded"
 }

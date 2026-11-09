@@ -10,7 +10,7 @@ import re
 import sys
 from urllib.parse import unquote
 
-TEXT_SUFFIXES = {'.md', '.txt', '.json', '.csv', '.py', '.yml'}
+TEXT_SUFFIXES = {'.md', '.txt', '.json', '.csv', '.py', '.yml', '.html', '.css', '.mjs'}
 PRIVATE_TARGET = re.compile(r'https://(?:drive\.google\.com/drive/folders/|drive\.google\.com/file/d/|docs\.google\.com/spreadsheets/d/)[A-Za-z0-9_-]{12,}')
 CREDENTIAL = re.compile(r'(?:gh[pousr]_|github_pat_|sk-(?:proj-|or-)?)[A-Za-z0-9_-]{16,}')
 HOST_PATH = re.compile(r'(?i)[CD]:[/\\](?:Users|Workspaces)[/\\]')
@@ -83,7 +83,7 @@ def validate(root: Path) -> list[str]:
     if acceptance.is_file():
         rows = list(csv.reader(io.StringIO(acceptance.read_text(encoding='utf-8-sig'))))
         identities = [row[0] for row in rows[1:] if row]
-        expected = {f'AT{number:02}' for number in range(1, 18)}
+        expected = {f'AT{number:02}' for number in range(1, 23)}
         if len(identities) != len(set(identities)) or set(identities) != expected:
             errors.append('acceptance identities incomplete or duplicated')
         if not rows or any(len(row) != 8 for row in rows):
@@ -92,6 +92,15 @@ def validate(root: Path) -> list[str]:
         errors.append('missing acceptance table')
 
     manifest = documents.get('MANIFEST.json')
+    if isinstance(config, dict) and isinstance(manifest, dict):
+        if config.get('package_version') != manifest.get('version') or config.get('schema_version') != 2:
+            errors.append('package/schema version mismatch')
+        if config.get('locations', {}).get('shared_memory', {}).get('same_container_as_catalog') is not True:
+            errors.append('default memory must share master catalog container')
+    if isinstance(schema, dict):
+        events = next((t for t in schema.get('tabs', []) if t.get('key') == 'events'), {})
+        if events.get('row_identity') != 'event_id' or events.get('append_only') is not True:
+            errors.append('append-only event identity required')
     if isinstance(manifest, dict) and isinstance(manifest.get('files'), dict):
         entries = manifest['files']
         actual = {p.relative_to(root).as_posix(): p for p in paths if p.name != 'MANIFEST.json'}

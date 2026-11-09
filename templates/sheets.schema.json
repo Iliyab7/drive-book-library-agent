@@ -1,7 +1,7 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "title": "فهرست مادر کتابخانه",
-  "note": "Field groups define required meaning, not an immutable table layout. Continue an existing compatible sheet without deleting data. Store actual IDs/URLs and private runtime records only in the destination account.",
+  "note": "Additive field groups, not fixed column positions. Catalog and shared memory default to tabs in the SAME existing master spreadsheet. Never erase old rows, reports, links or events. A compatible alternative requires explicit owner choice and capability readback.",
   "tabs": [
     {
       "key": "catalog",
@@ -29,7 +29,19 @@
         "pdf_url",
         "original_md_url",
         "translation_md_url",
-        "current_artifact_revision"
+        "current_artifact_revision",
+        "translation_policy",
+        "language_decision_evidence",
+        "translation_status",
+        "translation_not_required_reason",
+        "translation_html_url",
+        "coverage_status",
+        "fidelity_status",
+        "structure_status",
+        "reading_print_status",
+        "source_map_reference",
+        "source_map_revision",
+        "output_policy_version"
       ]
     },
     {
@@ -63,7 +75,15 @@
         "worker_verified_state",
         "progress_expectation",
         "controller_reference",
-        "recovered_from"
+        "recovered_from",
+        "execution_environment",
+        "input_language_decision",
+        "reconstruction_status",
+        "translation_status",
+        "reading_status",
+        "sync_state",
+        "last_event_id",
+        "checkpoint_revision"
       ]
     },
     {
@@ -87,7 +107,14 @@
         "resolution",
         "recheck_revision",
         "verdict",
-        "limitations"
+        "limitations",
+        "coverage_status",
+        "fidelity_status",
+        "structure_status",
+        "reading_print_status",
+        "html_hash",
+        "print_engine",
+        "reviewed_contiguous_ranges"
       ]
     },
     {
@@ -107,7 +134,11 @@
         "package_version",
         "schedule_id_and_readback",
         "capability_limits",
-        "next_action"
+        "next_action",
+        "schema_version",
+        "active_package_hash",
+        "locations_and_capabilities",
+        "activation_readback_at"
       ]
     },
     {
@@ -138,6 +169,36 @@
         "evidence",
         "checked_at"
       ]
+    },
+    {
+      "key": "events",
+      "title": "رویدادها",
+      "row_identity": "event_id",
+      "append_only": true,
+      "fields": [
+        "event_id",
+        "book_version_id",
+        "run_id",
+        "occurred_at",
+        "timezone",
+        "actor",
+        "role",
+        "event_type",
+        "stage",
+        "result",
+        "artifact_revision",
+        "evidence_or_checkpoint",
+        "corrects_event_id",
+        "recovered_from",
+        "next_action"
+      ]
     }
+  ],
+  "status_values": [
+    "pass",
+    "fail",
+    "not_run",
+    "needs_review",
+    "not_required"
   ]
 }

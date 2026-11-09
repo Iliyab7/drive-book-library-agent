@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "package_version": "2.0.0",
+  "scope": "offline synthetic package and real local Chromium template checks; no live library upgrade",
+  "historical_plan_base": "eac62b32a3c263a12a4057f3c930310a83d282ac",
+  "actual_start_head": "eac62b32a3c263a12a4057f3c930310a83d282ac",
+  "branch": "codex/library-v2-20261109",
+  "rollback_reference": {
+    "name": "pre-library-upgrade-20261109",
+    "target": "eac62b32a3c263a12a4057f3c930310a83d282ac",
+    "local_readback": true,
+    "pushed": false
+  },
+  "checks": {
+    "unit_suite": {"result": "pass", "tests": 31, "scope": "offline synthetic/unit and package/privacy checks", "dependencies": "pypdf 6.10.0, markdown-it-py 4.0.0, mdit-py-plugins 0.5.0"},
+    "bundle_validation": "pass: final file inventory/hashes, UTF-8, references, privacy patterns, versions, 22 acceptance identities and append-only event schema",
+    "browser": {
+      "engine": "Chromium 151.0.7922.34",
+      "viewports": ["1200x1000", "390x844"],
+      "issues": [],
+      "network_requests": 0,
+      "html_sha256": "bc08368f00da12d591823e9294477e742cb2974424edbb23ca596b9c4c52b241",
+      "print_pdf_sha256": "612704a5044cecc96e6dbfd264f95ab11a316bb9228fa6a7ff7c89d71e7b9b8c",
+      "print_pages": 2,
+      "technical_pdf_check": "pass: A4, extractable text, all fonts embedded, Vazirmatn identity verified",
+      "all_print_pages_viewed": true,
+      "contiguous_reading_scope": "all text of short synthetic fixture, source sections s0001-s0009, beginning through ending and footnote",
+      "source_pdf_pages_viewed": "all 3 English and 1 Persian synthetic source pages",
+      "limits": "The final sample table fits on page 1. Header repetition was also observed on an earlier two-page print of the same table CSS; this does not certify all future wide/long tables."
+    },
+    "independent_review": {
+      "actor": "separate Review context",
+      "scope": "current tools, contracts and all synthetic pipeline/state tests",
+      "targeted_tests_passed": 17,
+      "open_p1_p2": 0,
+      "tool_hashes": {
+        "tools/book_pipeline.py": "70ea7003cff516303a725fb64eb51d20bb66949172256128efd3e5a905f7d32b",
+        "tools/library_state.py": "cac1679fcbe3c5ed82db3578ff158771fefb9250081f09940482a27704853d90",
+        "tools/check_reading.mjs": "c3df81259fdd2a4c56871e64eb5e9daaeb287ff77923d69f0ad91e6755bdcda8"
+      },
+      "limits": "No live account, model translation benchmark, visual print or final manifest review by this role."
+    },
+    "independent_qa": {
+      "actor": "separate QA context",
+      "targeted_tests_passed": 17,
+      "html_sha256": "bc08368f00da12d591823e9294477e742cb2974424edbb23ca596b9c4c52b241",
+      "independent_print_pdf_sha256": "2e61c836bbd07608cc1e4a5c29378dd76231c7cacc6187b255445212eb8b56dd",
+      "all_2_print_pages_and_desktop_mobile_viewed": true,
+      "full_short_synthetic_text_read": true,
+      "network_requests": 0,
+      "open_material_findings": 0,
+      "limits": "Synthetic prewritten translation and template only; no live account or model translation quality check."
+    }
+  },
+  "not_run": [
+    "Live Drive/Sheets/Notion access, migration and event writes",
+    "Live scheduler, active worker upgrade or notification",
+    "Real books, model translation quality or full OCR benchmark",
+    "Long-term unattended continuity",
+    "Remote push or private cloud-memory synchronization"
+  ],
+  "historical_evidence_unchanged": true,
+  "account_acceptance_csv": "All recipient-account results remain not run; offline results do not replace them."
+}

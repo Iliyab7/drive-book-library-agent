@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "id": "20261109T151435Z-library-v2-upgrade",
+  "repository": "Iliyab7/drive-book-library-agent",
+  "occurred_at": "2026-11-09T15:14:35Z",
+  "title": "Upgrade portable library contract to version 2",
+  "summary": "Add language-aware two/four core outputs, witnessed reconstruction/source mapping, deterministic offline Persian reading HTML, and append-only activity memory in the same default master spreadsheet.",
+  "outcome": "Synthetic offline pipeline/state tests and independent Review/QA rechecks passed; real local Chromium desktop/mobile and every page of the two-page sample print were reviewed. Final bundle test evidence is in evidence/upgrade-v2-validation.json. No live account, scheduler, real book, message or remote publication changed. Cloud capture remains pending because work is local and unpushed.",
+  "status": "local-tested",
+  "decisions": [
+    "Use 2.0.0 for the breaking output/config contract; keep schema versions distinct.",
+    "Use a small witnessed reconstruction model, not a universal PDF parser or an extra translation pass.",
+    "Keep catalog plus shared operational memory/events in the same default Google Sheets file; preserve existing rows and use additive migration.",
+    "Use a central writer, stable event IDs, private durable outbox and destination readback; do not treat Sheets as an atomic distributed lock.",
+    "Treat products as optional runtimes and alternative destinations as capability contracts, without pretending all adapters are implemented."
+  ],
+  "blockers": [],
+  "next_actions": [
+    "After separately authorized publication or package transfer, let the installed agent follow docs/UPGRADE-2-FA.md on its own account with TEST fixtures.",
+    "Verify live Sheets event/memory writes and active-version readback before claiming the existing installation upgraded.",
+    "Keep real books and private execution records out of the public repository; verify cloud capture separately."
+  ],
+  "evidence": [
+    "docs/RELEASE-2-FA.md",
+    "docs/UPGRADE-2-FA.md",
+    "evidence/upgrade-v2-validation.json",
+    "tests/test_pipeline.py",
+    "tests/test_state.py"
+  ]
+}
