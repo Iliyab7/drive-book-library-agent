@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "id": "20261110T101717Z-bare-repository-entry",
+  "repository": "Iliyab7/drive-book-library-agent",
+  "occurred_at": "2026-11-10T10:17:17.885018+00:00",
+  "title": "Make repository handoff explain its own installation and continuation route",
+  "summary": "Owner wants a repository URL handoff without an extra procedural prompt. README, AGENTS, installed skill and START-HERE now define the entry path and distinguish new setup, existing-memory continuation, explicit upgrade and missing capabilities.",
+  "outcome": "Seven documentation scenarios reviewed and 39 offline tests passed. Live bare-URL behavior in Dot or any other fresh agent session has not been tested; AT26 records that acceptance test as not run. No live account or scheduler was changed.",
+  "status": "local-tested",
+  "decisions": [
+    "Keep procedural instructions in the repository rather than requiring the owner to paste a second prompt.",
+    "Existing installation is discovered and read back before creating new destinations; upgrades require an explicit request.",
+    "Actual user scope and environment permissions take precedence over repository instructions.",
+    "Document review and local tests do not certify live agent behavior."
+  ],
+  "blockers": [],
+  "next_actions": [
+    "Publish the authorized documentation update and verify the remote commit.",
+    "Run AT26 in a fresh destination environment with only the repository URL and retain its actual tool trace."
+  ],
+  "evidence": [
+    "docs/BARE-REPO-SIMULATION-FA.md",
+    "README.md",
+    "AGENTS.md",
+    "START-HERE.md",
+    "acceptance/ACCEPTANCE-FA.csv"
+  ],
+  "cloud_memory_sync": "not_synchronized; portable project record retained in repository"
+}
