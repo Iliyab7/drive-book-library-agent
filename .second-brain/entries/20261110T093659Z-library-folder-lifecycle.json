@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "id": "20261110T093659Z-library-folder-lifecycle",
+  "repository": "Iliyab7/drive-book-library-agent",
+  "occurred_at": "2026-11-10T09:36:59.585624+00:00",
+  "title": "Keep Inbox for unstarted PDFs and move active books through processing",
+  "summary": "Version 2.1.0 defines inbox to processing to output moves with stable source identity, checkpoints for paused work, durable move intents and destination readback. Full instructions and operational processing target are installed into the existing master-sheet memory only through explicit upgrade.",
+  "outcome": "39 offline tests and portable-bundle validation passed on Python 3.12. No live Drive move or Sheets upgrade performed.",
+  "status": "local-tested",
+  "decisions": [
+    "Inbox contains unstarted queue items only; errors and pauses stay in processing.",
+    "Move the original PDF with stable file identity and bytes; publish the same completed book folder only after quality checks.",
+    "Recover interrupted moves by source identity and parent/hash readback before retry.",
+    "Add processing target and move capability without replacing existing destinations, schedule or history."
+  ],
+  "blockers": [],
+  "next_actions": [
+    "Publish the authorized commit to main and verify remote readback.",
+    "The installed agent must apply docs/UPGRADE-2.1-FA.md and validate real TEST moves before claiming live activation."
+  ],
+  "evidence": [
+    "docs/UPGRADE-2.1-FA.md",
+    "tests/test_instruction_memory.py",
+    "tests/test_state.py",
+    "acceptance/ACCEPTANCE-FA.csv"
+  ],
+  "cloud_memory_sync": "not_synchronized; portable project event retained in repository"
+}

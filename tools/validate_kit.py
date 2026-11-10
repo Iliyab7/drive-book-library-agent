@@ -65,7 +65,7 @@ def validate(root: Path) -> list[str]:
         readiness = config.get('readiness', {})
         if config.get('template_only') is not True or not isinstance(readiness, dict) or readiness.get('ready_for_pdf') is not False or readiness.get('automated_cycle_observed') is not False:
             errors.append('readiness template must be unconfigured')
-        target_fields = ['root_folder_url', 'inbox_url', 'output_url', 'system_folder_url', 'spreadsheet_url', 'skill_url', 'config_url']
+        target_fields = ['root_folder_url', 'inbox_url', 'processing_url', 'output_url', 'system_folder_url', 'spreadsheet_url', 'skill_url', 'config_url']
         if any(config.get(field) is not None for field in target_fields):
             errors.append('private target in configuration template')
 
@@ -83,7 +83,7 @@ def validate(root: Path) -> list[str]:
     if acceptance.is_file():
         rows = list(csv.reader(io.StringIO(acceptance.read_text(encoding='utf-8-sig'))))
         identities = [row[0] for row in rows[1:] if row]
-        expected = {f'AT{number:02}' for number in range(1, 24)}
+        expected = {f'AT{number:02}' for number in range(1, 26)}
         if len(identities) != len(set(identities)) or set(identities) != expected:
             errors.append('acceptance identities incomplete or duplicated')
         if not rows or any(len(row) != 8 for row in rows):

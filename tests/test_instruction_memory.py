@@ -14,7 +14,8 @@ from instruction_memory import SOURCES, prepare_instructions, load_active_instru
 class InstructionMemoryTests(unittest.TestCase):
     def setUp(self):
         # Installation explicitly reads the package once.
-        self.config = {'template_only': False, 'inbox_url': 'synthetic-inbox', 'output_url': 'synthetic-output',
+        self.config = {'template_only': False, 'package_version': '2.1.0',
+                       'inbox_url': 'synthetic-inbox', 'processing_url': 'synthetic-processing', 'output_url': 'synthetic-output',
                        'locations': {k: {'reference': f'synthetic-{k}'} for k in ('files','catalog','shared_memory','checkpoints')},
                        'runtime': {'coordinator': 'test'}, 'coordination': {'serialization_verified': False},
                        'schedule': {'id': None, 'limitation': 'synthetic manual test'}}
@@ -41,6 +42,32 @@ class InstructionMemoryTests(unittest.TestCase):
         self.assertIn('Review', texts['coordinator'])
         self.assertIn('checkpoint', texts['workflow'])
         self.assertIn('active_config', texts['coordinator'])
+        self.assertIn('inbox → processing → output', texts['workflow'])
+        self.assertIn('processing', texts['coordinator'])
+        self.assertEqual(stored['config']['record_content_json']['processing_url'], 'synthetic-processing')
+
+    def test_missing_or_overlapping_processing_target_blocks_install_and_startup(self):
+        for value in (None, '', '  ', 'synthetic-inbox', 'synthetic-output'):
+            config = dict(self.config, processing_url=value)
+            with self.subTest(value=value), self.assertRaisesRegex(ValueError, 'distinct'):
+                prepare_instructions('source', 'revision', config)
+            # Even a consistently hashed bad sheet config must not start work.
+            packet = deepcopy(self.packet)
+            packet['config']['record_content_json'] = config
+            packet['manifest']['config_sha256'] = manifest_hash(config)
+            pointer = dict(self.active(), bundle_sha256=manifest_hash(packet['manifest']))
+            with self.subTest(startup=value), self.assertRaisesRegex(ValueError, 'distinct'):
+                load_active_instructions(pointer, packet['manifest'], packet['rows'], pointer, packet['config'])
+
+    def test_archived_v2_config_can_still_load_for_deliberate_rollback(self):
+        packet = deepcopy(self.packet)
+        config = packet['config']['record_content_json']
+        config.pop('processing_url')
+        config['package_version'] = '2.0.0'
+        packet['manifest']['package_version'] = '2.0.0'
+        packet['manifest']['config_sha256'] = manifest_hash(config)
+        pointer = dict(self.active(), package_version='2.0.0', bundle_sha256=manifest_hash(packet['manifest']))
+        self.assertEqual(load_active_instructions(pointer, packet['manifest'], packet['rows'], pointer, packet['config']), self.expected)
 
     def test_staged_partial_corrupt_duplicate_memory_rejected(self):
         with self.assertRaisesRegex(ValueError, 'not active'):

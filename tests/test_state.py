@@ -41,7 +41,8 @@ class StateTests(unittest.TestCase):
         old={'schema_version':1,'package_version':'1.0.0','spreadsheet_url':'synthetic-sheet','root_folder_url':'synthetic-root',
              'system_folder_url':'synthetic-system','custom':{'keep':True},'schedule':{'id':'existing','notification_destination':'existing-destination'},'readiness':{'ready_for_pdf':True}}
         migrated=migrate_config(old)
-        for key in ('spreadsheet_url','root_folder_url','custom','schedule','readiness'):self.assertEqual(migrated[key],old[key])
+        for key in ('spreadsheet_url','root_folder_url','custom','schedule'):self.assertEqual(migrated[key],old[key])
+        self.assertFalse(migrated['readiness']['ready_for_pdf'])
         self.assertFalse(migrated['activation_verified']);self.assertEqual(migrated['migration_status'],'pending_readback_and_sample')
         self.assertEqual(migrated['locations']['catalog']['reference'],migrated['locations']['shared_memory']['reference'])
         self.assertEqual(migrate_config(migrated),migrated);self.assertEqual(old['schema_version'],1)
@@ -49,6 +50,26 @@ class StateTests(unittest.TestCase):
         plan=schema_plan(existing)
         self.assertNotIn('book_version_id',plan['catalog']);self.assertIn('translation_html_url',plan['catalog']);self.assertIn('event_id',plan['events'])
         self.assertEqual(existing,before)
+    def test_folder_upgrade_preserves_targets_and_resets_prior_readiness(self):
+        template=json.loads((ROOT/'templates/library.config.example.json').read_text(encoding='utf-8'))
+        old=deepcopy(template)
+        old['package_version']='2.0.0';old.pop('processing_url');old['capabilities'].pop('move_files')
+        old['inbox_url']='synthetic-inbox';old['output_url']='synthetic-output'
+        old['schedule']['id']='existing-schedule';old['activation_verified']=True
+        old['readiness'].update(ready_for_pdf=True,automated_cycle_observed=True)
+        migrated=migrate_config(old)
+        self.assertEqual(migrated['package_version'],'2.1.0')
+        self.assertEqual(migrated['previous_package_version'],'2.0.0')
+        self.assertIsNone(migrated['processing_url'])
+        self.assertEqual(migrated['capabilities']['move_files'],'unverified')
+        self.assertEqual(migrated['inbox_url'],old['inbox_url'])
+        self.assertEqual(migrated['output_url'],old['output_url'])
+        self.assertEqual(migrated['schedule'],old['schedule'])
+        self.assertFalse(migrated['activation_verified'])
+        self.assertFalse(migrated['readiness']['ready_for_pdf'])
+        self.assertFalse(migrated['readiness']['automated_cycle_observed'])
+        self.assertEqual(migrate_config(migrated),migrated)
+        self.assertTrue(old['activation_verified'])
     def test_cut_after_append_resume_retry_and_correction_keep_history(self):
         with tempfile.TemporaryDirectory() as tmp:
             p=Path(tmp)/'outbox.json';first=event('start','stage_start');cp=event('cp')

@@ -11,6 +11,7 @@ import json
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
+PACKAGE_VERSION = '2.1.0'
 EVENT_FIELDS = {'event_id', 'occurred_at', 'timezone', 'actor', 'role', 'event_type',
                 'stage', 'result', 'book_version_id', 'run_id', 'artifact_revision', 'evidence_or_checkpoint'}
 
@@ -20,6 +21,18 @@ def migrate_config(old: dict) -> dict:
     if version not in (1, 2):
         raise ValueError('unsupported configuration schema')
     result = deepcopy(old)
+    folder_changed = False
+    if result.get('package_version') != PACKAGE_VERSION:
+        result['previous_package_version'] = old.get('package_version')
+        result['package_version'] = PACKAGE_VERSION
+        folder_changed = True
+    if 'processing_url' not in result:
+        result['processing_url'] = None  # Coordinator creates/retrieves and reads back the real folder.
+        folder_changed = True
+    capabilities = result.setdefault('capabilities', {})
+    if 'move_files' not in capabilities:
+        capabilities['move_files'] = 'unverified'
+        folder_changed = True
     memory = result.setdefault('memory', {})
     defaults = {'instruction_storage': 'full_text_in_master_sheet',
                 'source_repository_read_policy': 'install_or_explicit_upgrade_only',
@@ -41,14 +54,15 @@ def migrate_config(old: dict) -> dict:
             if value not in values:
                 values.append(value)
                 memory_changed = True
-    if memory_changed:
+    if memory_changed or folder_changed:
         result['migration_status'] = 'pending_readback_and_sample'
         result['activation_verified'] = False
+        readiness = result.setdefault('readiness', {})
+        readiness['ready_for_pdf'] = False
+        readiness['automated_cycle_observed'] = False
     if version == 2:
         return result
     result['schema_version'] = 2
-    result['package_version'] = '2.0.0'
-    result['previous_package_version'] = old.get('package_version')
     result['locations'] = {
         'files': {'provider': 'google_drive', 'reference': old.get('root_folder_url')},
         'catalog': {'provider': 'google_sheets', 'reference': old.get('spreadsheet_url')},
@@ -121,7 +135,7 @@ def save_outbox(path: Path, events: list[dict]) -> None:
 
 def capability_limits(config: dict, capabilities: dict) -> list[str]:
     limits = []
-    for name in ('preserve_original_files', 'readback_files', 'search_all_records',
+    for name in ('preserve_original_files', 'readback_files', 'move_files', 'search_all_records',
                  'stable_version_ids', 'append_events', 'recover_checkpoints'):
         if capabilities.get(name) is not True:
             limits.append(f'destination capability unverified: {name}')

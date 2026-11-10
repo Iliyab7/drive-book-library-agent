@@ -84,7 +84,12 @@
         "sync_state",
         "last_event_id",
         "checkpoint_revision",
-        "memory_revision"
+        "memory_revision",
+        "source_location",
+        "source_parent_reference",
+        "working_folder_url",
+        "source_move_event_id",
+        "delivery_move_event_id"
       ]
     },
     {

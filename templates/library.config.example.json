@@ -2,7 +2,7 @@
   "schema_version": 2,
   "template_only": true,
   "workflow": "drive-book-library",
-  "package_version": "2.0.0",
+  "package_version": "2.1.0",
   "account_verified": false,
   "root_folder_url": null,
   "inbox_url": null,
@@ -113,6 +113,8 @@
     "scheduler": "unverified",
     "independent_review": "unverified",
     "independent_qa": "unverified",
-    "serialization": "unverified"
-  }
+    "serialization": "unverified",
+    "move_files": "unverified"
+  },
+  "processing_url": null
 }

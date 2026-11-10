@@ -11,6 +11,7 @@ from copy import deepcopy
 import hashlib
 import json
 from pathlib import Path
+from library_state import PACKAGE_VERSION
 
 ROOT = Path(__file__).resolve().parents[1]
 SOURCES = {
@@ -32,12 +33,19 @@ def manifest_hash(manifest: dict) -> str:
     return digest(json.dumps(manifest, sort_keys=True, ensure_ascii=False, separators=(',', ':')))
 
 
-def validate_config(config: dict) -> None:
+def validate_config(config: dict, package_version: str = PACKAGE_VERSION) -> None:
     if not isinstance(config, dict) or not config or config.get('template_only') is True:
         raise ValueError('actual nonempty operational config required')
     for key in ('inbox_url', 'output_url'):
         if not config.get(key):
             raise ValueError('operational config target missing')
+    # Keep an archived 2.0.0 method/config loadable for a deliberate rollback.
+    if package_version != '2.0.0':
+        if config.get('package_version') != package_version:
+            raise ValueError('operational config package version mismatch')
+        targets = [config.get(key) for key in ('inbox_url', 'processing_url', 'output_url')]
+        if any(not isinstance(target, str) or not target.strip() for target in targets) or len(set(targets)) != 3:
+            raise ValueError('operational config requires distinct inbox/processing/output targets')
     for key in ('files', 'catalog', 'shared_memory', 'checkpoints'):
         if not config.get('locations', {}).get(key, {}).get('reference'):
             raise ValueError('operational config location missing')
@@ -64,12 +72,12 @@ def prepare_instructions(package_revision: str, memory_revision: str, config: di
                          'record_type': 'instruction_chunk',
                          'memory_revision': memory_revision, 'component_id': key,
                          'chunk_index': index, 'instruction_text': text})
-    manifest = {'package_version': '2.0.0', 'package_revision': package_revision,
+    manifest = {'package_version': PACKAGE_VERSION, 'package_revision': package_revision,
                 'memory_revision': memory_revision, 'components': components,
                 'config_record_id': config_record['record_id'],
                 'config_sha256': manifest_hash(config_record['record_content_json'])}
     pointer = {'record_id': 'active_method', 'memory_revision': memory_revision,
-               'package_version': '2.0.0', 'bundle_sha256': manifest_hash(manifest),
+               'package_version': PACKAGE_VERSION, 'bundle_sha256': manifest_hash(manifest),
                'activation_status': 'staged'}
     return {'pointer': pointer, 'manifest': manifest, 'rows': rows, 'config': config_record}
 
@@ -94,7 +102,7 @@ def load_active_instructions(pointer_before: dict, manifest: dict, rows: list[di
             or config_record.get('memory_revision') != manifest['memory_revision']
             or manifest_hash(config_record.get('record_content_json', {})) != manifest['config_sha256']):
         raise ValueError('active operational config missing or version/hash mismatch')
-    validate_config(config_record['record_content_json'])
+    validate_config(config_record['record_content_json'], manifest['package_version'])
     components = manifest['components']
     if len(components) != len(SOURCES) or {c['component_id'] for c in components} != set(SOURCES):
         raise ValueError('required instruction components missing or duplicated')
