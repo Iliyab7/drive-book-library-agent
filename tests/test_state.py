@@ -58,7 +58,7 @@ class StateTests(unittest.TestCase):
         old['schedule']['id']='existing-schedule';old['activation_verified']=True
         old['readiness'].update(ready_for_pdf=True,automated_cycle_observed=True)
         migrated=migrate_config(old)
-        self.assertEqual(migrated['package_version'],'2.1.0')
+        self.assertEqual(migrated['package_version'],'2.2.0')
         self.assertEqual(migrated['previous_package_version'],'2.0.0')
         self.assertIsNone(migrated['processing_url'])
         self.assertEqual(migrated['capabilities']['move_files'],'unverified')

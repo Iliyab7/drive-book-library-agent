@@ -2,7 +2,7 @@
   "schema_version": 2,
   "template_only": true,
   "workflow": "drive-book-library",
-  "package_version": "2.1.0",
+  "package_version": "2.2.0",
   "account_verified": false,
   "root_folder_url": null,
   "inbox_url": null,
@@ -63,16 +63,17 @@
   "activation_verified": false,
   "output_policy": {
     "source_persian": [
-      "original.pdf",
-      "original.md"
+      "{title} — {author} — {version} — original.pdf",
+      "{title} — {author} — {version} — original.md"
     ],
     "translate_to_fa": [
-      "original.pdf",
-      "original.md",
-      "translation.fa.md",
-      "translation.fa.html"
+      "{title} — {author} — {version} — original.pdf",
+      "{title} — {author} — {version} — original.md",
+      "{title} — {author} — {version} — translation.fa.md",
+      "{title} — {author} — {version} — translation.fa.html"
     ],
-    "mixed_selective": "preserve existing Persian; translate only witnessed foreign-language sections"
+    "mixed_selective": "preserve existing Persian; translate only witnessed foreign-language sections",
+    "filename_rule": "All delivered files include source-backed title and author; unknown metadata is explicit and needs_review; read back renamed file links."
   },
   "memory": {
     "writer": "coordinator",

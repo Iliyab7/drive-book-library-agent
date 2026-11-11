@@ -83,7 +83,7 @@ def validate(root: Path) -> list[str]:
     if acceptance.is_file():
         rows = list(csv.reader(io.StringIO(acceptance.read_text(encoding='utf-8-sig'))))
         identities = [row[0] for row in rows[1:] if row]
-        expected = {f'AT{number:02}' for number in range(1, 27)}
+        expected = {f'AT{number:02}' for number in range(1, 28)}
         if len(identities) != len(set(identities)) or set(identities) != expected:
             errors.append('acceptance identities incomplete or duplicated')
         if not rows or any(len(row) != 8 for row in rows):

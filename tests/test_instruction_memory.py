@@ -14,7 +14,7 @@ from instruction_memory import SOURCES, prepare_instructions, load_active_instru
 class InstructionMemoryTests(unittest.TestCase):
     def setUp(self):
         # Installation explicitly reads the package once.
-        self.config = {'template_only': False, 'package_version': '2.1.0',
+        self.config = {'template_only': False, 'package_version': '2.2.0',
                        'inbox_url': 'synthetic-inbox', 'processing_url': 'synthetic-processing', 'output_url': 'synthetic-output',
                        'locations': {k: {'reference': f'synthetic-{k}'} for k in ('files','catalog','shared_memory','checkpoints')},
                        'runtime': {'coordinator': 'test'}, 'coordination': {'serialization_verified': False},

@@ -11,7 +11,7 @@ import json
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-PACKAGE_VERSION = '2.1.0'
+PACKAGE_VERSION = '2.2.0'
 EVENT_FIELDS = {'event_id', 'occurred_at', 'timezone', 'actor', 'role', 'event_type',
                 'stage', 'result', 'book_version_id', 'run_id', 'artifact_revision', 'evidence_or_checkpoint'}
 
@@ -33,6 +33,16 @@ def migrate_config(old: dict) -> dict:
     if 'move_files' not in capabilities:
         capabilities['move_files'] = 'unverified'
         folder_changed = True
+    output_policy = result.setdefault('output_policy', {})
+    prefix = '{title} — {author} — {version} — '
+    for key, roles in {
+        'source_persian': ['original.pdf', 'original.md'],
+        'translate_to_fa': ['original.pdf', 'original.md', 'translation.fa.md', 'translation.fa.html'],
+    }.items():
+        required = [prefix + role for role in roles]
+        if output_policy.get(key) != required:
+            output_policy[key] = required
+            folder_changed = True
     memory = result.setdefault('memory', {})
     defaults = {'instruction_storage': 'full_text_in_master_sheet',
                 'source_repository_read_policy': 'install_or_explicit_upgrade_only',

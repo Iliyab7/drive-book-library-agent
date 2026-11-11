@@ -13,13 +13,42 @@ import json
 from pathlib import Path
 import re
 import shutil
-from urllib.parse import urlsplit
+import unicodedata
+from urllib.parse import urlsplit, quote
 
 from markdown_it import MarkdownIt
 from mdit_py_plugins.footnote import footnote_plugin
 from pypdf import PdfReader
 
 ROOT = Path(__file__).resolve().parents[1]
+
+
+def filename_part(value: str, fallback: str, max_bytes: int = 70) -> str:
+    """Portable Unicode component; preserve Persian, bound bytes, retain identity."""
+    text = unicodedata.normalize('NFC', value)
+    text = ''.join(c for c in text if not unicodedata.category(c).startswith('C') or c == '\u200c')
+    text = re.sub(r'[<>:"/\\|?*]', ' ', text)
+    text = re.sub(r'\s+', ' ', text).strip(' .') or fallback
+    if len(text.encode('utf-8')) > max_bytes:
+        tail = '-' + hashlib.sha256(text.encode('utf-8')).hexdigest()[:8]
+        text = text.encode('utf-8')[:max_bytes - len(tail)].decode('utf-8', errors='ignore').rstrip(' .') + tail
+    if re.fullmatch(r'(?i)(CON|PRN|AUX|NUL|COM[1-9]|LPT[1-9])(?:\..*)?', text):
+        text = '_' + text
+    return text
+
+
+def output_filenames(spec: dict) -> tuple[dict[str, str], list[str]]:
+    title = spec.get('title_original') or spec.get('title_fa') or ''
+    authors = spec.get('authors') or []
+    if isinstance(authors, str):
+        authors = [authors]
+    author = '، '.join(a.strip() for a in authors if isinstance(a, str) and a.strip())
+    missing = [key for key, value in (('title', title), ('authors', author)) if not value.strip()]
+    prefix = ' — '.join((filename_part(title, 'عنوان نامشخص'),
+                         filename_part(author, 'نویسنده نامشخص'),
+                         filename_part(spec['book_version_id'], 'نسخه نامشخص', 32)))
+    return {role: f'{prefix} — {role}' for role in
+            ('original.pdf', 'original.md', 'translation.fa.md', 'translation.fa.html')}, missing
 
 
 def sha256(path: Path) -> str:
@@ -121,7 +150,7 @@ def raster_data(asset: str, asset_root: Path) -> str:
     return f'data:{mime};base64,' + base64.b64encode(data).decode()
 
 
-def markdown(blocks: list[dict], asset_root: Path | None = None) -> str:
+def markdown(blocks: list[dict], asset_root: Path | None = None, pdf_filename: str = 'original.pdf') -> str:
     chunks = []
     for b in blocks:
         if b['kind'] == 'heading':
@@ -141,7 +170,7 @@ def markdown(blocks: list[dict], asset_root: Path | None = None) -> str:
         # Footnote definitions cannot have a second standalone paragraph without
         # altering semantics: append their source reference inside the definition.
         pages = ', '.join(map(str, b['pdf_pages']))
-        source = f"[{b['id']} · PDF {pages}](original.pdf#page={b['pdf_pages'][0]})"
+        source = f"[{b['id']} · PDF {pages}]({quote(pdf_filename, safe='')}#page={b['pdf_pages'][0]})"
         if b['kind'] == 'footnote':
             chunks[-1] += ' ' + source
         else:
@@ -161,7 +190,7 @@ def reading_html(md: str, title: str, asset_root: Path, limitations: list[str]) 
         raise ValueError('footnotes have no actual rendered reference; inspect escaped/code markers')
     toc = []
     for i, token in enumerate(tokens):
-        if token.type == 'paragraph_open' and i + 1 < len(tokens) and re.fullmatch(r'\[s\d+ · PDF [\d, ]+\]\(original\.pdf#page=\d+\)', tokens[i + 1].content):
+        if token.type == 'paragraph_open' and i + 1 < len(tokens) and re.fullmatch(r'\[s\d+ · PDF [\d, ]+\]\([^\s()]+\.pdf#page=\d+\)', tokens[i + 1].content):
             token.attrSet('class', 'source-reference')
         if token.type == 'heading_open':
             anchor = f'chapter-{len(toc) + 1}'
@@ -224,26 +253,30 @@ def build_book(spec: dict, pdf: Path, out: Path, private: Path) -> dict:
             elif source['kind'] != 'image' and not target.get('text', '').strip():
                 raise ValueError('empty translation')
     # Prepare everything before creating the output directory.
-    original = markdown(blocks, pdf.parent)
-    fa_md = markdown(translated, pdf.parent) if translated else None
+    names, missing_metadata = output_filenames(spec)
+    original = markdown(blocks, pdf.parent, names['original.pdf'])
+    fa_md = markdown(translated, pdf.parent, names['original.pdf']) if translated else None
     fa_html = reading_html(fa_md, spec['title_fa'], pdf.parent, spec.get('limitations', [])) if translated else None
     out.mkdir(parents=True)
     private.mkdir(parents=True)
-    shutil.copyfile(pdf, out / 'original.pdf')
-    (out / 'original.md').write_text(original, encoding='utf-8', newline='\n')
+    shutil.copyfile(pdf, out / names['original.pdf'])
+    (out / names['original.md']).write_text(original, encoding='utf-8', newline='\n')
     if translated:
-        (out / 'translation.fa.md').write_text(fa_md, encoding='utf-8', newline='\n')
-        (out / 'translation.fa.html').write_text(fa_html, encoding='utf-8', newline='\n')
+        (out / names['translation.fa.md']).write_text(fa_md, encoding='utf-8', newline='\n')
+        (out / names['translation.fa.html']).write_text(fa_html, encoding='utf-8', newline='\n')
     record = dict(book_version_id=spec['book_version_id'], language=spec['language'], pdf_pages=page_count,
                   title_original=spec['title_original'], title_fa=spec['title_fa'],
                   language_decision=policy, translation_status=policy['translation_status'],
                   translation_not_required_reason=('نیاز ندارد، منبع فارسی است' if not translated else None),
                   quality_status='needs_independent_review',
                   hashes={p.name: sha256(p) for p in out.iterdir()},
-                  pdf_url=(out / 'original.pdf').resolve().as_uri(),
-                  original_md_url=(out / 'original.md').resolve().as_uri(),
-                  translation_md_url=(out / 'translation.fa.md').resolve().as_uri() if translated else None,
-                  translation_html_url=(out / 'translation.fa.html').resolve().as_uri() if translated else None)
+                  output_filenames={role: name for role, name in names.items() if translated or role.startswith('original.')},
+                  filename_metadata_status='needs_review' if missing_metadata else 'complete',
+                  filename_missing_metadata=missing_metadata,
+                  pdf_url=(out / names['original.pdf']).resolve().as_uri(),
+                  original_md_url=(out / names['original.md']).resolve().as_uri(),
+                  translation_md_url=(out / names['translation.fa.md']).resolve().as_uri() if translated else None,
+                  translation_html_url=(out / names['translation.fa.html']).resolve().as_uri() if translated else None)
     for key in ('authors', 'edition_if_known', 'summary', 'main_problem_and_thesis', 'chapter_outline', 'concepts', 'topic_tree', 'tags_fa', 'tags_original_language', 'use_and_distinction'):
         record[key] = spec.get(key)
     record['limitations'] = spec.get('limitations', [])

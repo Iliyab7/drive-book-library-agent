@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "id": "20261111T080501Z-book-author-filenames",
+  "repository": "Iliyab7/drive-book-library-agent",
+  "occurred_at": "2026-11-11T08:05:01.646505+00:00",
+  "title": "Include book title and author in every delivered filename",
+  "summary": "Version 2.2.0 requires source-backed title and author on every reader deliverable. Generator emits portable Unicode filenames with version identity, role mapping and correctly encoded PDF links. Unknown metadata is explicit and flagged for review.",
+  "outcome": "42 offline tests passed; live file renames and Sheets upgrade not performed.",
+  "status": "local-tested",
+  "decisions": [
+    "Name all core and optional reader deliverables with title and author; private checkpoints are separate.",
+    "Preserve PDF bytes and live Drive file identity through rename; repair links and review changed MD/HTML revisions.",
+    "Store full naming instructions and version-bound config in the installed master-sheet memory on explicit upgrade."
+  ],
+  "blockers": [],
+  "next_actions": [
+    "Publish the requested update and verify remote HEAD.",
+    "Run the requested fresh-agent repository-only reading test with no live writes.",
+    "Installed agent follows docs/UPGRADE-2.2-FA.md and live AT27."
+  ],
+  "evidence": [
+    "tools/book_pipeline.py",
+    "tests/test_pipeline.py",
+    "docs/UPGRADE-2.2-FA.md",
+    "acceptance/ACCEPTANCE-FA.csv"
+  ],
+  "cloud_memory_sync": "not_synchronized; portable project event retained in repository"
+}

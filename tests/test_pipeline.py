@@ -9,10 +9,11 @@ import sys
 import tempfile
 import unittest
 from pypdf import PdfReader
+from urllib.parse import unquote
 
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'tools'))
-from book_pipeline import build_book, reconstruct, language_policy, reading_html, markdown
+from book_pipeline import build_book, reconstruct, language_policy, reading_html, markdown, output_filenames
 
 FIX=ROOT/'tests/fixtures/v2'
 
@@ -26,9 +27,14 @@ class PipelineTests(unittest.TestCase):
     def test_nonfa_four_outputs_same_translation_and_pdf(self):
         out=self.path/'out'
         record=build_book(self.spec,FIX/'nonfa.pdf',out,self.path/'private')
-        self.assertEqual(set(record['hashes']),{'original.pdf','original.md','translation.fa.md','translation.fa.html'})
-        self.assertEqual((out/'original.pdf').read_bytes(),(FIX/'nonfa.pdf').read_bytes())
-        md=(out/'translation.fa.md').read_bytes();ht=(out/'translation.fa.html').read_text(encoding='utf-8')
+        names=record['output_filenames']
+        self.assertEqual(set(record['hashes']),set(names.values()))
+        self.assertEqual(len(names),4)
+        for name in names.values():
+            self.assertIn(self.spec['title_original'],name)
+            self.assertIn(self.spec['authors'][0],name)
+        self.assertEqual((out/names['original.pdf']).read_bytes(),(FIX/'nonfa.pdf').read_bytes())
+        md=(out/names['translation.fa.md']).read_bytes();ht=(out/names['translation.fa.html']).read_text(encoding='utf-8')
         self.assertIn(hashlib.sha256(md).hexdigest(),ht)
         self.assertIn('بهبود محتمل است، اما تضمین‌شده نیست',ht)
         self.assertIn('footnote-backref',ht)
@@ -38,10 +44,43 @@ class PipelineTests(unittest.TestCase):
     def test_persian_two_outputs_no_fake_translation(self):
         spec=json.loads((FIX/'persian.json').read_text(encoding='utf-8'))
         out=self.path/'out';record=build_book(spec,FIX/'persian.pdf',out,self.path/'private')
-        self.assertEqual(set(record['hashes']),{'original.pdf','original.md'})
+        self.assertEqual(set(record['hashes']),set(record['output_filenames'].values()))
+        self.assertEqual(len(record['output_filenames']),2)
+        for name in record['hashes']:
+            self.assertIn(spec['title_original'],name)
+            self.assertIn(spec['authors'][0],name)
         self.assertEqual(record['translation_status'],'not_required_source_persian')
         self.assertIsNone(record['translation_md_url']);self.assertIsNone(record['translation_html_url'])
         self.assertIn('نیاز ندارد',record['translation_not_required_reason'])
+    def test_named_pdf_links_resolve_in_markdown_and_html(self):
+        out=self.path/'out';record=build_book(self.spec,FIX/'nonfa.pdf',out,self.path/'private')
+        names=record['output_filenames']
+        for role in ('original.md','translation.fa.md','translation.fa.html'):
+            text=(out/names[role]).read_text(encoding='utf-8')
+            targets=re.findall(r'(?:\]\(|href=")[^\s"<>]*?\.pdf#page=\d+',text)
+            self.assertTrue(targets)
+            for target in targets:
+                filename=unquote(target.removeprefix('](').removeprefix('href="').split('#')[0])
+                self.assertEqual(filename,names['original.pdf'])
+                self.assertTrue((out/filename).is_file())
+    def test_missing_author_is_explicit_and_not_fabricated(self):
+        self.spec['authors']=[]
+        out=self.path/'out';record=build_book(self.spec,FIX/'nonfa.pdf',out,self.path/'private')
+        self.assertEqual(record['filename_metadata_status'],'needs_review')
+        self.assertEqual(record['filename_missing_metadata'],['authors'])
+        self.assertEqual(record['authors'],[])
+        self.assertTrue(all('نویسنده نامشخص' in name for name in record['hashes']))
+    def test_portable_unicode_names_and_long_name_collisions(self):
+        self.spec.update(title_original='../کتاب: آزمون? '*40,authors=['نویسنده/آزمایشی '*40])
+        names,_=output_filenames(self.spec)
+        other=deepcopy(self.spec);other['title_original']+='تفاوت'
+        different,_=output_filenames(other)
+        self.assertNotEqual(names,different)
+        for name in names.values():
+            self.assertLessEqual(len(name.encode('utf-8')),240)
+            self.assertNotRegex(name,r'[<>:"/\\|?*]')
+            self.assertEqual(Path(name).name,name)
+        build_book(self.spec,FIX/'nonfa.pdf',self.path/'out',self.path/'private')
     def test_reconstruction_exact_order_join_table_and_footnote(self):
         blocks=reconstruct(self.spec['reconstruction']);md=markdown(blocks)
         self.assertIn('continues across the page boundary',md)

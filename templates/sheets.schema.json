@@ -41,7 +41,10 @@
         "reading_print_status",
         "source_map_reference",
         "source_map_revision",
-        "output_policy_version"
+        "output_policy_version",
+        "output_filenames",
+        "filename_metadata_status",
+        "filename_missing_metadata"
       ]
     },
     {
